@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
+
+body > #root {
+    font-family: 'Noto Sans';
+    height: 100vh;
+}
+
+.window{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+}
