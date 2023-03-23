@@ -1,9 +1,9 @@
 .login{
     display: flex;
     flex-direction: column;
-    gap: 1.75em;
-    padding-block: 3em;
-    padding-inline: 3.5em;
+    gap: 1.75rem;
+    padding-block: 3rem;
+    padding-inline: 3.5rem;
     h1{
         font-size: 18px;
         color: #333;
@@ -11,33 +11,65 @@
     form{
         display: flex;
         flex-direction: column;
-        gap: 0.90625em;
+        gap: 0.90625rem;
         > .input-box{
             position: relative;
             color: #828282;
             label{
+                display: flex;
+                gap: 0.66rem;
+                align-items: center;
                 user-select: none;
                 position: absolute;
-                top: 1em;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 1rem;
+                padding-inline: 0.5rem;
+                background-color: transparent;
+                transition: 0.3s;
+                &.input-password svg{
+                    top:-2px;
+                }
+                svg{
+                    transform: scale(1.3);
+                    // top: 2px;
+                    position: relative;
+                }
             }
             input{
                 width: 100%;
-                height: 3em;
-                padding: 1em;
+                height: 3rem;
+                padding: 1rem;
                 border: 1px solid #BDBDBD;
                 border-radius: 8px;
                 outline:0;
+                &:focus+label,
+                &:valid+label{
+                    background-color: #fff;
+                    transform: translate(-5%, -175%);
+                    letter-spacing: 1.2;
+                }
             }
         }
         button{
-            margin-top: 0.5em;
+            margin-top: 0.5rem;
             font-weight: 600;
             color: white;
             background-color: #2F80ED;
             border-radius: 8px;
             border: 0;
-            padding: 0.6em;
-            line-height: 1.25em;
+            padding: 0.6rem;
+            line-height: 1.25rem;
+        }
+    }
+    > .social-strategy-list{
+        
+        .social-container{
+            width: 2.625rem;
+            height: 2.625rem;
+            border: 1px solid #BDBDBD;
+            border-radius: 100%;
+            font-size: 1.125em;
         }
     }
 }
