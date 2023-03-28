@@ -2,8 +2,8 @@ import Axios from 'axios'
 // import { router } from '@/router'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
-    ? '/api/'
-    : '//localhost:3000/api/'
+    ? ''
+    : '//localhost:3000/'
 
 const axios = Axios.create({
     withCredentials: true,
@@ -14,7 +14,7 @@ export const httpService = {
         return ajax(endpoint, 'GET', data)
     },
     post(endpoint:string, data:any) {
-        return ajax(endpoint, 'POST', data)
+            return ajax(endpoint, 'POST', data)
     },
     put(endpoint:string, data:any) {
         return ajax(endpoint, 'PUT', data)

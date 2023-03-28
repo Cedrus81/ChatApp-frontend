@@ -1,6 +1,7 @@
 .login{
     display: flex;
     flex-direction: column;
+    width: 29.625rem;
     gap: 1.75rem;
     padding-block: 3rem;
     padding-inline: 3.5rem;
@@ -12,7 +13,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.90625rem;
-        > .input-box{
+        .input-box{
             position: relative;
             color: #828282;
             label{
@@ -36,7 +37,9 @@
                     position: relative;
                 }
             }
-            input{
+            input,
+            textarea{
+                font-size: 1.125rem;
                 width: 100%;
                 height: 3rem;
                 padding: 1rem;
@@ -46,8 +49,40 @@
                 &:focus+label,
                 &:valid+label{
                     background-color: #fff;
-                    transform: translate(-5%, -175%);
-                    letter-spacing: 1.2;
+                    transform: translate(-5%, -165%);
+                    border-radius: 8px;
+                }
+            }
+
+            textarea {
+                height: 100%;
+                & + label{
+                top: 2em;
+                }
+                &:focus+label,
+                &:valid+label{
+                    transform: translate(-5%, -199%);
+                }
+
+            }
+        }
+        .multi-input-box{
+            display: flex;
+            .input-box.left{
+                flex: 1;
+                input{
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    &::-webkit-calendar-picker-indicator { 
+                        display: none !important
+                    }
+                }
+            }
+            .input-box.right{
+               flex: 2.7;
+                input{
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
                 }
             }
         }
@@ -62,14 +97,45 @@
             line-height: 1.25rem;
         }
     }
+    p{
+        font-size: 14px;
+        letter-spacing: -0.035em;
+        color: #828282;
+        text-align: center;
+        font-size: 0.875rem;
+        &.footnote{
+            position: absolute;
+            bottom: -3rem;
+            &.credit{
+                right:0
+            }
+            &.creator{
+                left: 0;
+            }
+        }
+    }
     > .social-strategy-list{
-        
+        display: flex;
+        justify-content: center;
+        gap: 1.6rem;
         .social-container{
+            background-color: #fff;
+            color: #828282;
             width: 2.625rem;
             height: 2.625rem;
-            border: 1px solid #BDBDBD;
+            border: 1px solid #828282;
             border-radius: 100%;
-            font-size: 1.125em;
+            transition: 0.3s;
+            transform: scale(1.1);
+            svg{
+                width: 1.125rem;
+                height: 1.125rem;
+            }
+            &:hover{
+                transform: scale(1.3);
+                border-color: #2F80ED;
+                color: #2F80ED;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
 
 html{
-    font-size: 16px;
+    font-size: 14px;
 }
 
 * {
@@ -20,4 +20,11 @@ body > #root {
     transform: translate(-50%, -50%);
     border: 1px solid #BDBDBD;
     border-radius: 8px;
+    .error-msg-container{
+        padding: 0.8em;
+        color: white;
+        background-color: #ED564E;
+        border-radius: 8px;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    }
 }
