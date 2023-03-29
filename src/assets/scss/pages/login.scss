@@ -9,6 +9,9 @@
         font-size: 18px;
         color: #333;
     }
+    p, pre{
+        margin: 0;
+    }
     form{
         display: flex;
         flex-direction: column;
@@ -22,7 +25,7 @@
                 align-items: center;
                 user-select: none;
                 position: absolute;
-                top: 50%;
+                top: 1.5rem;
                 transform: translateY(-50%);
                 left: 1rem;
                 padding-inline: 0.5rem;
@@ -46,24 +49,42 @@
                 border: 1px solid #BDBDBD;
                 border-radius: 8px;
                 outline:0;
-                &:focus+label,
-                &:valid+label{
+                transition: 0.2s;
+                &:focus + label,
+                &.floating + label{
                     background-color: #fff;
-                    transform: translate(-5%, -165%);
+                    top: 0;
+                    left: 0.75rem;
                     border-radius: 8px;
+                }
+                &.invalid:not(:focus){
+                    border: 1px solid rgb(201, 71, 71);
+                    box-shadow: 0 0 5px rgba(201, 71, 71, 0.3);
+                    & + label{
+                        color: #c94747;
+                    }
                 }
             }
 
             textarea {
                 height: 100%;
                 & + label{
-                top: 2em;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 }
-                &:focus+label,
-                &:valid+label{
-                    transform: translate(-5%, -199%);
+                &:focus + label,
+                &.floating + label{
+                   top: 0;
+                   left: 2.8rem;
                 }
 
+            }
+            .error-msg{
+                font-weight: 500;
+                color: #c94747;
+                padding-inline-start: 1em;
+                text-align: start;
             }
         }
         .multi-input-box{

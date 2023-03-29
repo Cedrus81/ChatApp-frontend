@@ -39,7 +39,6 @@ function Login() {
       }
       dispatch(signin(signinDto))
   }
-  console.log('rerendered')
   return (
     <section className='login window'>
       <h2>Auth Wiedersehen</h2>

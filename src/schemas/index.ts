@@ -13,7 +13,7 @@ declare module 'yup' {
 yup.addMethod(yup.string, 'fromCountryList', function(message){
     return this.test('isFromList', message, function(value){
         const { path, createError } = this;
-        return countries.some(ctry => ctry.dial_code === value) || createError({path, message})
+        return countries.some(ctry => ctry.dial_code === value) || !value || createError({path, message})
     })
 })
 
