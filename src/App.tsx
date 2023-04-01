@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import {  createBrowserRouter,  RouterProvider} from "react-router-dom"
 import { useAppDispatch } from "./hooks";
-import { initialTheme, setTheme } from "./store/slices/styleSlice";
+import { initialTheme } from "./store/slices/styleSlice";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 const router = createBrowserRouter([

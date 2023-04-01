@@ -1,0 +1,30 @@
+.theme-toggle{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding: 0.4em;
+    border: 0;
+    border-radius: 100%;
+    transition: 0.3s;
+    &:hover{
+        box-shadow: 0px 0px 8px rgba(#BDBDBD, 1);
+    }
+    svg{
+        font-size: 1.5rem;
+        
+        color: white;
+    }
+
+    background: linear-gradient(180deg, #ffcf54 11.2%, #ff9e1b 91.1%);
+    &.dark{
+        background: linear-gradient(180deg, rgb(52, 59, 85) 11.4%, rgb(63, 76, 119) 70.2%);
+        svg{
+            color: #bbe4e9;
+        }
+    }
+}
+

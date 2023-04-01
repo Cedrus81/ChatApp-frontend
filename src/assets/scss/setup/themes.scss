@@ -5,6 +5,8 @@ $themes: (
         headline: #333,
         text: #828282,
         error: #c94747,
+        theme-toggle: linear-gradient(180deg, #ffcf54 11.2%, #ff9e1b 91.1%),
+        svg: #fff,
         // border: #BDBDBD
     ),
     dark: (
@@ -12,7 +14,9 @@ $themes: (
         call-to-action: #8AB4F8,
         headline: #E0E0E0,
         text: #cecece,
-        error: #CF6679
+        error: #CF6679,
+        theme-toggle: linear-gradient(180deg, rgb(52, 59, 85) 11.4%, rgb(63, 76, 119) 70.2%),
+        svg: #bbe4e9,
         // border: #BDBDBD
     )
 );
@@ -81,6 +85,12 @@ $themes: (
         &[data-theme*="error"]{
             border: 1px solid getLastAttribute($theme);
             box-shadow: 0 0 5px rgba(getLastAttribute($theme), 0.3);
+        }
+    }
+    [data-theme*="theme-toggle"]{
+        background: getLastAttribute(($theme));
+        [data-theme*="svg"]{
+            color: getLastAttribute($theme);
         }
     }
 }

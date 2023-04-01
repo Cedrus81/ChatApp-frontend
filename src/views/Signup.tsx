@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { useFormik } from "formik";
 import { IoMdLock, IoMdMail, IoMdPerson, IoMdPhonePortrait, IoIosFlag } from "react-icons/io"
-import { BsFillFileEarmarkPersonFill, BsMoonStars, BsSun } from "react-icons/bs";
+import { BsFillFileEarmarkPersonFill, BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 import { Link } from "react-router-dom"
 import { countries } from "../data"
 import { signupSchema } from "../schemas";
@@ -62,20 +62,17 @@ function Signup() {
     }
 
     function inputClasses(field:string): string{
-        let classes = ''
+        // let classes = ''
         // classes += isInvalid(field) ? 'invalid ' : ''
-        classes += isFloating(field) ? 'floating' : ''
-        return classes
+        return isFloating(field) ? 'floating' : ''
+        // return classes
     }
-
-    // invalid if data is invalid, isn't empty, field was already visited AND isn't focused (handled by CSS)
-    // function isInvalid(field: string  ){
-    //     return (errors[field as keyof typeof values] && touched[field as keyof typeof values] && values[field as keyof typeof values])
-    // }
-
     // label should be floating as long as field isn't empty, or is focused (handled by the CSS)
     function isFloating(field: string  ){
         return values[field as keyof typeof values]
+    }
+    function toggleTheme(){
+        dispatch(currTheme === 'light' ? setTheme('dark') : setTheme('light'))
     }
 
     const CountryDatalist = useMemo(() =>
@@ -88,11 +85,13 @@ function Signup() {
             </datalist>, [countries])
   return (
     <main className='login window'>
-        <button className="theme-toggle">{currTheme === 'light' ? <BsSun /> : <BsMoonStars />}</button>
+        <button className="theme-toggle" data-theme="theme-toggle" onClick={toggleTheme}>{currTheme === 'light' ? <BsSunFill data-theme="svg" /> : <BsMoonStarsFill data-theme="svg" />}</button>
         <h2 data-theme="headline">Welcome to Auth Wiedersehen!</h2>
         <p className="text" data-theme="text">Please add in your credentials (email and password), any other personal detail is optional, and can be updated later on.
             <br />
             <b>Important:</b> There is no need for any detail here to be authentic!
+            <br />
+            {currTheme}
         </p>
         <form onSubmit={handleSubmit}>
             {fields.map(field => <InputBox key={field.id} value={values[field.id as keyof typeof values]} handleChange={handleChange} handleBlur={handleBlur} data={field} touched={touched[field.id as keyof typeof touched]} error={errors[field.id as keyof typeof errors]} classes={inputClasses}/>)}
