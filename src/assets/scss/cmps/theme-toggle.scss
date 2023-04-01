@@ -15,16 +15,6 @@
     }
     svg{
         font-size: 1.5rem;
-        
-        color: white;
-    }
-
-    background: linear-gradient(180deg, #ffcf54 11.2%, #ff9e1b 91.1%);
-    &.dark{
-        background: linear-gradient(180deg, rgb(52, 59, 85) 11.4%, rgb(63, 76, 119) 70.2%);
-        svg{
-            color: #bbe4e9;
-        }
     }
 }
 

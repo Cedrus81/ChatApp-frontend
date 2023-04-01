@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { storageService } from "../../services/local-storage.service";
 interface styleState {
-    theme: string | null
+    theme: string
 }
 
 const initialState: styleState = {
@@ -19,9 +19,9 @@ export const styleSlice = createSlice({
             document.querySelector('body')?.classList.toggle(state.theme)
         },
         initialTheme: (state =>{
-            state.theme = storageService.getItem('theme') 
-            storageService.setItem('theme', state.theme)
-            document.querySelector('body')?.classList.toggle(state.theme as string)
+            state.theme = storageService.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            if (!storageService.getItem('theme')) storageService.setItem('theme', state.theme)
+            document.querySelector('body')?.classList.toggle(state.theme)
         })
     }
 })

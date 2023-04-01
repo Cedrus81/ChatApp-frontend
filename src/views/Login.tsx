@@ -8,8 +8,6 @@ import { signin } from "../store/slices/userSlice";
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-
-  const loginErrorMsg = useAppSelector(state => state.user.errorMsg)
   const dispatch = useAppDispatch()
 
   const strategies = {

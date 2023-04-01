@@ -7,12 +7,12 @@ import { countries } from "../data"
 import { signupSchema } from "../schemas";
 import InputBox from "../cmps/InputBox";
 import { useAppDispatch, useAppSelector } from "../hooks";
+import ThemeToggle from "../cmps/ThemeToggle";
 import { setTheme } from "../store/slices/styleSlice";
 import { FieldData } from "../types";
-
 function Signup() {
     const dispatch = useAppDispatch()
-    const currTheme = useAppSelector(state => state.style.theme)
+    // const currTheme = useAppSelector(state => state.style.theme)
     const {handleSubmit, errors, touched, isSubmitting,
         values,
         handleChange,
@@ -71,9 +71,9 @@ function Signup() {
         return values[field as keyof typeof values]
     }
    
-    function toggleTheme(){
-        dispatch(currTheme === 'light' ? setTheme('dark') : setTheme('light'))
-    }
+    // function toggleTheme(){
+    //     dispatch(currTheme === 'light' ? setTheme('dark') : setTheme('light'))
+    // }
 
     // const inputBoxProps = useCallback((fieldName: string, idx: number, fields: FieldData[]) => {
     //     const data = fields[idx] as FieldData
@@ -103,7 +103,8 @@ function Signup() {
             </datalist>, [countries])
   return (
     <main className='login window'>
-        <button className="theme-toggle" data-theme="theme-toggle" onClick={toggleTheme}>{currTheme === 'light' ? <BsSunFill data-theme="svg" /> : <BsMoonStarsFill data-theme="svg" />}</button>
+        <ThemeToggle dispatch={dispatch} />
+        {/* <button className="theme-toggle" data-theme="theme-toggle" onClick={toggleTheme}>{currTheme === 'light' ? <BsSunFill data-theme="svg" /> : <BsMoonStarsFill data-theme="svg" />}</button> */}
         <h2 data-theme="headline">Welcome to Auth Wiedersehen!</h2>
         <p className="text" data-theme="text">Please add in your credentials (email and password), any other personal detail is optional, and can be updated later on.
             <br />
@@ -122,7 +123,7 @@ function Signup() {
             </div>
             <button type="submit" className="call-to-action" data-theme="call-to-action">Sign up</button>
         </form>
-        <p className="text">Already have a user? <Link to='/'>Login page</Link></p>
+        <p className="text" data-theme="text">Already have a user? <Link to='/'>Login page</Link></p>
     </main>
   )
 }
