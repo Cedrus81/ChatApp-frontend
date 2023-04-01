@@ -1,5 +1,5 @@
-import { useMemo } from "react"
-import { useFormik } from "formik";
+import { useCallback, useMemo } from "react"
+import { useFormik, FastField } from "formik";
 import { IoMdLock, IoMdMail, IoMdPerson, IoMdPhonePortrait, IoIosFlag } from "react-icons/io"
 import { BsFillFileEarmarkPersonFill, BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 import { Link } from "react-router-dom"
@@ -8,6 +8,7 @@ import { signupSchema } from "../schemas";
 import InputBox from "../cmps/InputBox";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setTheme } from "../store/slices/styleSlice";
+import { FieldData } from "../types";
 
 function Signup() {
     const dispatch = useAppDispatch()
@@ -27,7 +28,7 @@ function Signup() {
         validationSchema: signupSchema,
         onSubmit
     })
-    const fields = [
+    const fields: FieldData[] = [
        { id: 'email',
         icon: <IoMdMail />,
         },
@@ -41,7 +42,7 @@ function Signup() {
         icon: <BsFillFileEarmarkPersonFill />,
         },
     ]
-    const phoneFields = [
+    const phoneFields: FieldData[] = [
         {
             id: 'dial',
             icon: <IoIosFlag />,
@@ -62,18 +63,35 @@ function Signup() {
     }
 
     function inputClasses(field:string): string{
-        // let classes = ''
-        // classes += isInvalid(field) ? 'invalid ' : ''
         return isFloating(field) ? 'floating' : ''
-        // return classes
     }
+
     // label should be floating as long as field isn't empty, or is focused (handled by the CSS)
     function isFloating(field: string  ){
         return values[field as keyof typeof values]
     }
+   
     function toggleTheme(){
         dispatch(currTheme === 'light' ? setTheme('dark') : setTheme('light'))
     }
+
+    // const inputBoxProps = useCallback((fieldName: string, idx: number, fields: FieldData[]) => {
+    //     const data = fields[idx] as FieldData
+    //     const value = values[fieldName as keyof typeof values]
+    //     const error = errors[fieldName as keyof typeof errors]
+    //     const isTouched = touched[fieldName as keyof typeof touched]
+    //     const classes = inputClasses
+    //     return {
+    //         data,
+    //         value,
+    //         isTouched,
+    //         error,
+    //         classes,
+    //         handleChange,
+    //         handleBlur,
+    //      }
+    // }, [handleChange])
+    console.log('updated')
 
     const CountryDatalist = useMemo(() =>
             <datalist id="country-codes" >
@@ -91,13 +109,16 @@ function Signup() {
             <br />
             <b>Important:</b> There is no need for any detail here to be authentic!
             <br />
-            {currTheme}
         </p>
         <form onSubmit={handleSubmit}>
-            {fields.map(field => <InputBox key={field.id} value={values[field.id as keyof typeof values]} handleChange={handleChange} handleBlur={handleBlur} data={field} touched={touched[field.id as keyof typeof touched]} error={errors[field.id as keyof typeof errors]} classes={inputClasses}/>)}
+            {fields.map(field => <InputBox key={field.id} value={values[field.id as keyof typeof values]} handleChange={handleChange} handleBlur={handleBlur} data={field} isTouched={touched[field.id as keyof typeof touched]} error={errors[field.id as keyof typeof errors]} classes={inputClasses}/>)}
+            {/* {fields.map((field, idx) => { return (<InputBox key={field.id} {...inputBoxProps(field.id, idx, fields)}/>)})} */}
+
             <div className="divided-input-box">
                 {CountryDatalist}
-            {phoneFields.map(field => <InputBox key={field.id} value={values[field.id as keyof typeof values]} handleChange={handleChange} handleBlur={handleBlur} data={field} touched={touched[field.id as keyof typeof touched]} error={errors[field.id as keyof typeof errors]} classes={inputClasses}/>)}
+            {phoneFields.map(field => <InputBox key={field.id} value={values[field.id as keyof typeof values]} handleChange={handleChange} handleBlur={handleBlur} data={field} isTouched={touched[field.id as keyof typeof touched]} error={errors[field.id as keyof typeof errors]} classes={inputClasses}/>)}
+            {/* {phoneFields.map((field, idx) => <InputBox key={field.id} {...inputBoxProps(field.id, idx, phoneFields)}/>)} */}
+
             </div>
             <button type="submit" className="call-to-action" data-theme="call-to-action">Sign up</button>
         </form>

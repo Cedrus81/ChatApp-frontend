@@ -1,20 +1,20 @@
 import { ChangeEventHandler, FocusEventHandler } from "react"
-
+import { FieldData } from "../types"
 type InputBoxProps = {
-    data: {id: string, icon: JSX.Element, title?: string,  flexRatio?: number, list?: string}
+    data: FieldData
     value: string
     error: string | undefined
     handleChange: ChangeEventHandler<Element>
     handleBlur: FocusEventHandler<Element>
-    touched: boolean | undefined
+    isTouched: boolean | undefined
     classes: Function
 }
-
+// type InputBoxProps
 function InputBox(props: InputBoxProps) {
-    const {data, value, error, handleChange, handleBlur, touched, classes } = props
+    const {data, value, error, handleChange, handleBlur, isTouched, classes } = props
     const {id, icon, title, flexRatio, list} = data
     function shouldDisplayError() {
-      return error && value && touched
+      return error && value && isTouched
     }
   return (
     <div className={`input-box ${flexRatio === 1 ? 'left' : flexRatio && flexRatio > 1 ? 'right' : ''}`} style={{ flex: flexRatio}}>
