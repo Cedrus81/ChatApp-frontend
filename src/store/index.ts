@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import pizzaReducer from './slices/pizzaSlice'
 import userReducer from './slices/userSlice'
 // ...
 
 export const store = configureStore({
   reducer: {
     // Examples:
-    pizza:pizzaReducer,
     user: userReducer
     // posts: postsReducer,
     // comments: commentsReducer,

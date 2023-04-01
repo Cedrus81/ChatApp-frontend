@@ -1,0 +1,97 @@
+$themes: (
+    light: (
+        background: #fff,
+        call-to-action: #2F80ED,
+        headline: #333,
+        text: #828282,
+        error: #c94747,
+        // border: #BDBDBD
+    ),
+    dark: (
+        background: #333,
+        call-to-action: #8AB4F8,
+        headline: #E0E0E0,
+        text: #cecece,
+        error: #CF6679
+        // border: #BDBDBD
+    )
+);
+
+
+@function str-split($string, $separator) {
+    // empty array/list
+    $split-arr: ();
+    // first index of separator in string
+    $index : str-index($string, $separator);
+    // loop through string
+    @while $index != null {
+        // get the substring from the first character to the separator
+        $item: str-slice($string, 1, $index - 1);
+        // push item to array
+        $split-arr: append($split-arr, $item);
+        // remove item and separator from string
+        $string: str-slice($string, $index + 1);
+        // find new index of separator
+        $index : str-index($string, $separator);
+    }
+    // add the remaining string to list (the last item)
+    $split-arr: append($split-arr, $string);
+
+    @return $split-arr;
+}
+
+@function getLastClass(){
+    $class: str-split('#{&}', '.');
+    $numClasses: length($class);
+    @return nth($class, $numClasses);
+}
+
+@function getLastAttribute($theme){
+    $attributes: str-split('#{&}', '=');
+    $numAttributes: length($attributes);
+    $attr: nth($attributes, $numAttributes);
+    $attr: str-slice($attr, 1, str-length($attr) - 1);
+    @return map-get($themes, $theme, $attr);
+}
+
+// @function getTheme(){
+//     $spaceIdx: str-index('#{&}', ' ');
+//     $theme: if($spaceIdx, str-slice('#{&}', str-index('#{&}', '.') + 1, str-index('#{&}', ' ')), str-slice('#{&}', str-index('#{&}', '.') + 1));
+//     @return $theme;
+// }
+
+@mixin setTheme($theme){
+    background-color: map-get($themes, $theme, 'background');
+    [data-theme*="background"]{
+        background-color: getLastAttribute($theme);
+    }
+    [data-theme*="headline"]{
+        color: getLastAttribute($theme)
+    }
+    [data-theme*="call-to-action"]{
+        background-color: getLastAttribute($theme);
+    }
+    [data-theme*="text"]{
+        color: getLastAttribute($theme);
+        &[data-theme*="error"]{
+            color: getLastAttribute($theme)
+        }
+    }
+    [data-theme*="border"]{
+        &[data-theme*="error"]{
+            color: getLastAttribute($theme);
+            border: 1px solid getLastAttribute($theme);
+            box-shadow: 0 0 5px rgba(getLastAttribute($theme), 0.3);
+        }
+    }
+}
+
+body{
+    &.dark{
+        @include setTheme('dark')
+    }
+    &.light{
+        @include setTheme('light')
+    }
+    
+}

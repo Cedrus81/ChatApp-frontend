@@ -8,6 +8,10 @@ html{
     box-sizing: border-box;
 }
 
+body{
+    margin: 0;
+}
+
 body > #root {
     font-family: 'Noto Sans';
     height: 100vh;
@@ -18,13 +22,7 @@ body > #root {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    margin: 2em;
     border: 1px solid #BDBDBD;
     border-radius: 8px;
-    .error-msg-container{
-        padding: 0.8em;
-        color: white;
-        background-color: #ED564E;
-        border-radius: 8px;
-        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    }
 }

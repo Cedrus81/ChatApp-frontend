@@ -40,10 +40,9 @@ function Login() {
       dispatch(signin(signinDto))
   }
   return (
-    <section className='login window'>
-      <h2>Auth Wiedersehen</h2>
-      <h1>Login</h1>
-      {loginErrorMsg && <div className="error-msg-container">{loginErrorMsg}</div>}
+    <main className='login window'>
+      <h2 className="headline">Auth Wiedersehen</h2>
+      <h1 className="headline">Login</h1>
       <form onSubmit={(e)=> onLogin(e)}>
         <div className="input-box">
           <input id="login-email" ref={emailRef} type="email" required autoComplete="" />
@@ -55,18 +54,18 @@ function Login() {
           <label htmlFor="login-password" className="input-password"><IoMdLock /> Password</label>
         </div>
         
-        <button>Login</button>
+        <button type="submit" className="call-to-action">Login</button>
       </form>
-      <p>or continue with these social profiles</p>
+      <p className="text">or continue with these social profiles</p>
       <div className="social-strategy-list">
         { Object.keys(strategies).map( (media, idx) => {
           return <button key={`login-strategy-${Object.keys(strategies)[idx]}`} className="social-container" onClick={strategies[media as keyof typeof strategies].handler}>{strategies[media as keyof typeof strategies].icon}</button>
         })}
       </div>
       <p>Don’t have an account yet? <Link to='/signup'>Register</Link></p>
-      <p className="footnote creator">created by <u><b>Erez Eitan</b></u></p>
-      <p className="footnote credit">devChallenges.io</p>
-    </section>
+      <p className="footnote creator text">created by <u><b>Erez Eitan</b></u></p>
+      <p className="footnote credit text">devChallenges.io</p>
+    </main>
   )
 }
 

@@ -16,112 +16,23 @@
         display: flex;
         flex-direction: column;
         gap: 0.90625rem;
-        .input-box{
-            position: relative;
-            color: #828282;
-            label{
-                display: flex;
-                gap: 0.66rem;
-                align-items: center;
-                user-select: none;
-                position: absolute;
-                top: 1.5rem;
-                transform: translateY(-50%);
-                left: 1rem;
-                padding-inline: 0.5rem;
-                background-color: transparent;
-                transition: 0.3s;
-                &.input-password svg{
-                    top:-2px;
-                }
-                svg{
-                    transform: scale(1.3);
-                    // top: 2px;
-                    position: relative;
-                }
-            }
-            input,
-            textarea{
-                font-size: 1.125rem;
-                width: 100%;
-                height: 3rem;
-                padding: 1rem;
-                border: 1px solid #BDBDBD;
-                border-radius: 8px;
-                outline:0;
-                transition: 0.2s;
-                &:focus + label,
-                &.floating + label{
-                    background-color: #fff;
-                    top: 0;
-                    left: 0.75rem;
-                    border-radius: 8px;
-                }
-                &.invalid:not(:focus){
-                    border: 1px solid rgb(201, 71, 71);
-                    box-shadow: 0 0 5px rgba(201, 71, 71, 0.3);
-                    & + label{
-                        color: #c94747;
-                    }
-                }
-            }
-
-            textarea {
-                height: 100%;
-                & + label{
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                }
-                &:focus + label,
-                &.floating + label{
-                   top: 0;
-                   left: 2.8rem;
-                }
-
-            }
-            .error-msg{
-                font-weight: 500;
-                color: #c94747;
-                padding-inline-start: 1em;
-                text-align: start;
-            }
-        }
-        .multi-input-box{
-            display: flex;
-            .input-box.left{
-                flex: 1;
-                input{
-                    border-top-right-radius: 0;
-                    border-bottom-right-radius: 0;
-                    &::-webkit-calendar-picker-indicator { 
-                        display: none !important
-                    }
-                }
-            }
-            .input-box.right{
-               flex: 2.7;
-                input{
-                    border-top-left-radius: 0;
-                    border-bottom-left-radius: 0;
-                }
-            }
-        }
-        button{
+        
+        
+        button.call-to-action{
             margin-top: 0.5rem;
             font-weight: 600;
             color: white;
-            background-color: #2F80ED;
+            // background-color: #2F80ED;
             border-radius: 8px;
             border: 0;
             padding: 0.6rem;
             line-height: 1.25rem;
         }
     }
-    p{
+    .text{
         font-size: 14px;
         letter-spacing: -0.035em;
-        color: #828282;
+        // color: #828282;
         text-align: center;
         font-size: 0.875rem;
         &.footnote{
