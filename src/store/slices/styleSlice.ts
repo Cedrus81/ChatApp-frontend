@@ -13,9 +13,17 @@ export const styleSlice = createSlice({
     initialState,
     reducers:{
         setTheme: (state, action: PayloadAction<string>) => {
+            document.querySelector('body')?.classList.toggle(state.theme)
             state.theme = action.payload
-        }
+            document.querySelector('body')?.classList.toggle(state.theme)
+        },
+        initialTheme: (state =>{
+           state.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        })
     }
 })
+
+export const { setTheme, initialTheme } = styleSlice.actions
+
 
 export default styleSlice.reducer

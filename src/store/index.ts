@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './slices/userSlice'
+import styleReducer from './slices/styleSlice'
 // ...
 
 export const store = configureStore({
   reducer: {
     // Examples:
-    user: userReducer
+    user: userReducer,
+    style: styleReducer
     // posts: postsReducer,
     // comments: commentsReducer,
     // users: usersReducer,

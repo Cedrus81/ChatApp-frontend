@@ -1,13 +1,17 @@
 import { useMemo } from "react"
 import { useFormik } from "formik";
 import { IoMdLock, IoMdMail, IoMdPerson, IoMdPhonePortrait, IoIosFlag } from "react-icons/io"
-import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
+import { BsFillFileEarmarkPersonFill, BsMoonStars, BsSun } from "react-icons/bs";
 import { Link } from "react-router-dom"
 import { countries } from "../data"
 import { signupSchema } from "../schemas";
 import InputBox from "../cmps/InputBox";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { setTheme } from "../store/slices/styleSlice";
 
 function Signup() {
+    const dispatch = useAppDispatch()
+    const currTheme = useAppSelector(state => state.style.theme)
     const {handleSubmit, errors, touched, isSubmitting,
         values,
         handleChange,
@@ -51,6 +55,7 @@ function Signup() {
             title: '10 digits length, e.g. 0541234567'
         }
     ]
+
     function onSubmit(values:any, actions:any){
         console.log(values)
         actions.resetForm()
@@ -58,15 +63,15 @@ function Signup() {
 
     function inputClasses(field:string): string{
         let classes = ''
-        classes += isInvalid(field) ? 'invalid ' : ''
-        classes += isFloating(field) ? 'floating ' : ''
+        // classes += isInvalid(field) ? 'invalid ' : ''
+        classes += isFloating(field) ? 'floating' : ''
         return classes
     }
 
     // invalid if data is invalid, isn't empty, field was already visited AND isn't focused (handled by CSS)
-    function isInvalid(field: string  ){
-        return (errors[field as keyof typeof values] && touched[field as keyof typeof values] && values[field as keyof typeof values])
-    }
+    // function isInvalid(field: string  ){
+    //     return (errors[field as keyof typeof values] && touched[field as keyof typeof values] && values[field as keyof typeof values])
+    // }
 
     // label should be floating as long as field isn't empty, or is focused (handled by the CSS)
     function isFloating(field: string  ){
@@ -83,6 +88,7 @@ function Signup() {
             </datalist>, [countries])
   return (
     <main className='login window'>
+        <button className="theme-toggle">{currTheme === 'light' ? <BsSun /> : <BsMoonStars />}</button>
         <h2 data-theme="headline">Welcome to Auth Wiedersehen!</h2>
         <p className="text" data-theme="text">Please add in your credentials (email and password), any other personal detail is optional, and can be updated later on.
             <br />

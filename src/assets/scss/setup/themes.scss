@@ -40,11 +40,11 @@ $themes: (
     @return $split-arr;
 }
 
-@function getLastClass(){
-    $class: str-split('#{&}', '.');
-    $numClasses: length($class);
-    @return nth($class, $numClasses);
-}
+// @function getLastClass(){
+//     $class: str-split('#{&}', '.');
+//     $numClasses: length($class);
+//     @return nth($class, $numClasses);
+// }
 
 @function getLastAttribute($theme){
     $attributes: str-split('#{&}', '=');
@@ -79,7 +79,6 @@ $themes: (
     }
     [data-theme*="border"]{
         &[data-theme*="error"]{
-            color: getLastAttribute($theme);
             border: 1px solid getLastAttribute($theme);
             box-shadow: 0 0 5px rgba(getLastAttribute($theme), 0.3);
         }
