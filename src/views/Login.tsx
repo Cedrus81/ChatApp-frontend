@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { FormEvent, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { signin } from "../store/slices/userSlice";
+
+import ThemeToggle from "../cmps/ThemeToggle";
+
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -39,8 +42,9 @@ function Login() {
   }
   return (
     <main className='login window'>
-      <h2 className="headline">Auth Wiedersehen</h2>
-      <h1 className="headline">Login</h1>
+      <ThemeToggle dispatch={dispatch} />
+      <h2 data-theme="headline">Auth Wiedersehen</h2>
+      <h1 data-theme="headline">Login</h1>
       <form onSubmit={(e)=> onLogin(e)}>
         <div className="input-box">
           <input id="login-email" ref={emailRef} type="email" required autoComplete="" />
@@ -52,17 +56,17 @@ function Login() {
           <label htmlFor="login-password" className="input-password"><IoMdLock /> Password</label>
         </div>
         
-        <button type="submit" className="call-to-action">Login</button>
+        <button type="submit" className="call-to-action" data-theme="call-to-action">Login</button>
       </form>
-      <p className="text">or continue with these social profiles</p>
+      <p className="text" data-theme="text">or continue with these social profiles</p>
       <div className="social-strategy-list">
         { Object.keys(strategies).map( (media, idx) => {
           return <button key={`login-strategy-${Object.keys(strategies)[idx]}`} className="social-container" onClick={strategies[media as keyof typeof strategies].handler}>{strategies[media as keyof typeof strategies].icon}</button>
         })}
       </div>
-      <p>Don’t have an account yet? <Link to='/signup'>Register</Link></p>
-      <p className="footnote creator text">created by <u><b>Erez Eitan</b></u></p>
-      <p className="footnote credit text">devChallenges.io</p>
+      <p data-theme="text">Don’t have an account yet? <Link to='/signup'>Register</Link></p>
+      <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
+      <p className="footnote credit text" data-theme="text">devChallenges.io</p>
     </main>
   )
 }
