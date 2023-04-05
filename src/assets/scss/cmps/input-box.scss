@@ -64,12 +64,33 @@
         padding-inline-start: 1em;
         text-align: start;
     }
+    .reset-field{
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 21px;
+        right: 16px;
+        transform: translate(50%, -50%);
+        width: 2.1rem;
+        height: 2.1rem;
+        border: 0;
+        border-radius: 100%;
+        background-color: transparent;
+        transition: 0.2s;
+        svg{
+            font-size: 1.3rem;
+        }
+        &:hover{
+            background-color: #bdbdbd67;
+        }
+    }
 }
 
 .divided-input-box{
     display: flex;
     .input-box.left{
-        flex: 1;
         input{
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -79,7 +100,6 @@
         }
     }
     .input-box.right{
-       flex: 2.5;
         input{
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;

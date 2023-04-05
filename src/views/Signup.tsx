@@ -55,7 +55,7 @@ function Signup() {
             {
                 id: 'phone',
                 icon: <IoMdPhonePortrait />,
-                flexRatio: 2.5,
+                flexRatio: 2,
                 title: '10 digits length, e.g. 0541234567'
             }
         ],
@@ -65,7 +65,8 @@ function Signup() {
     ]
 
     function onSubmit(data: SignupFormValues){
-        console.log(data)
+        console.log('success',data)
+        
         // todo dispatch and action and redirect after
         reset()
         // actions.resetForm()
@@ -78,7 +79,6 @@ function Signup() {
                   </option>  
                 )}
             </datalist>, [countries])
-            console.log('form rendered')
   return (
     <main className='login window'>
         <ThemeToggle dispatch={dispatch} />
@@ -92,7 +92,7 @@ function Signup() {
             // todo: add error handling logic
             console.log('serverside errors etc. logic should be here', e)})}>
             {fields.map((field) => { return (
-                <div className={field.length > 1 ? 'divided-input-box' : 'full-input-box'}>
+                <div key={`${field[0].id}-container`} className={field.length > 1 ? 'divided-input-box' : 'full-input-box'}>
                 {field.map(data => {
                     return (
                         <InputBoxRHF 
@@ -102,6 +102,7 @@ function Signup() {
                         error={errors[data.id as keyof typeof errors]} 
                         isDirty={dirtyFields[data.id as keyof typeof dirtyFields]} 
                         currVal={getValues(data.id as keyof SignupFormValues)}
+                        resetField={()=>resetField(data.id as keyof SignupFormValues)}
                         />
                     )
             })}
