@@ -20,10 +20,9 @@ type SignupFormValues = {
     phone: string
     dial: string
 }
-//todo add a resetfield option (button) to each input
 function Signup() {
     const dispatch = useAppDispatch()
-    const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, reset, trigger, resetField, getValues} = useForm<SignupFormValues>({
+    const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<SignupFormValues>({
         resolver: yupResolver(signupSchema),
         defaultValues: {
             email: '',

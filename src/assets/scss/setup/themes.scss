@@ -44,12 +44,6 @@ $themes: (
     @return $split-arr;
 }
 
-// @function getLastClass(){
-//     $class: str-split('#{&}', '.');
-//     $numClasses: length($class);
-//     @return nth($class, $numClasses);
-// }
-
 @function getLastAttribute($theme){
     $attributes: str-split('#{&}', '=');
     $numAttributes: length($attributes);
@@ -57,12 +51,6 @@ $themes: (
     $attr: str-slice($attr, 1, str-length($attr) - 1);
     @return map-get($themes, $theme, $attr);
 }
-
-// @function getTheme(){
-//     $spaceIdx: str-index('#{&}', ' ');
-//     $theme: if($spaceIdx, str-slice('#{&}', str-index('#{&}', '.') + 1, str-index('#{&}', ' ')), str-slice('#{&}', str-index('#{&}', '.') + 1));
-//     @return $theme;
-// }
 
 @mixin setTheme($theme){
     background-color: map-get($themes, $theme, 'background');

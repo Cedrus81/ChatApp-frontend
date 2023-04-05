@@ -36,13 +36,13 @@
             left: 0.75rem;
             border-radius: 8px;
         }
-        // &.invalid:not(:focus){
-        //     border: 1px solid rgb(201, 71, 71);
-        //     box-shadow: 0 0 5px rgba(201, 71, 71, 0.3);
-        //     & + label{
-        //         color: #c94747;
-        //     }
-        // }
+        &:-internal-autofill-selected ~ button{
+            background-color: #333;
+            color: #E0E0E0;
+            &:hover{
+                background-color: #BDBDBD;
+            }
+        }
     }
 
     textarea {
@@ -66,7 +66,6 @@
         text-align: start;
     }
     .reset-field{
-        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -77,9 +76,16 @@
         width: 2.1rem;
         height: 2.1rem;
         border: 0;
+        opacity: 0;
         border-radius: 100%;
         background-color: transparent;
+        pointer-events: none;
         transition: 0.2s;
+        &.on{
+            cursor: pointer;
+            pointer-events: all;
+            opacity: 1;
+        }
         svg{
             font-size: 1.3rem;
         }

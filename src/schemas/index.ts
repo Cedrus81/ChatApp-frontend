@@ -26,3 +26,8 @@ export const signupSchema = yup.object().shape({
     dial: yup.string().fromCountryList('Unknown code'),
 })
 
+export const loginSchema = yup.object().shape({
+    email: yup.string().email('Must be a valid email').required('Required'),
+    password: yup.string().min(5).max(20).matches(passwordRules, '5-20 chars, from which: 1 uppercase, 1 lowercase, 1 number').required('Required'),
+})
+
