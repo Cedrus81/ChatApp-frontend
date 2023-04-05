@@ -66,10 +66,22 @@ function Signup() {
 
     function onSubmit(data: SignupFormValues){
         console.log('success',data)
-        
+        const cleanedData = Object.keys(data)
+        .filter(key => data[key as keyof SignupFormValues] !== '')
+        .reduce((acc: any, key) =>{
+            acc[key] = data[key as keyof SignupFormValues]
+            return acc
+        },{})
+        if(cleanedData.phone && cleanedData.dial){
+            cleanedData.phone = cleanedData.dial + '-' + cleanedData.phone
+        } else {
+            delete cleanedData.phone
+        }
+        delete cleanedData.dial
+
+        console.log(cleanedData)
         // todo dispatch and action and redirect after
-        reset()
-        // actions.resetForm()
+        // reset()
     }
     const CountryDatalist = useMemo(() =>
             <datalist id="country-codes" >
