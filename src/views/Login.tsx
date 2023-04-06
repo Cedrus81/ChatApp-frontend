@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IoMdMail, IoMdLock } from "react-icons/io";
 import {  faGithub, faGoogle, faTwitter, faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
-import { FormEvent } from "react";
 import { useAppDispatch } from "../hooks";
 import { signin } from "../store/slices/userSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -59,8 +58,8 @@ const fields: FieldData[] = [
   return (
     <main className='login window'>
       <ThemeToggle dispatch={dispatch} />
-      <h2 data-theme="headline">Auth Wiedersehen</h2>
-      <h1 data-theme="headline">Login</h1>
+      <h3 data-theme="headline">Auth Wiedersehen</h3>
+      <h2 data-theme="headline">Login</h2>
       <form onSubmit={(e)=>handleSubmit(onSubmit)(e).catch((e)=>{
             // todo: add error handling logic
             console.log('serverside errors etc. logic should be here', e)})}>

@@ -80,7 +80,6 @@ function Signup() {
 
         console.log(cleanedData)
         // todo dispatch and action and redirect after
-        // reset()
     }
     const CountryDatalist = useMemo(() =>
             <datalist id="country-codes" >
@@ -123,6 +122,8 @@ function Signup() {
             <button type="submit" className="call-to-action" data-theme="call-to-action">Sign up</button>
         </form>
         <p className="text" data-theme="text">Already have a user? <Link to='/'>Login page</Link></p>
+        <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
+        <p className="footnote credit text" data-theme="text">devChallenges.io</p>
     </main>
   )
 }

@@ -14,9 +14,25 @@ body{
 }
 
 body > #root {
-    font-family: 'Noto Sans';
     height: 100vh;
 }
+
+body,button{
+    font-family: 'Noto Sans';
+}
+
+button{
+    cursor: pointer;
+}
+
+h1{
+    font-size: 2.25rem;
+}
+h4{
+    font-size: 1.125rem;
+}
+
+
 
 .window{
     position: absolute;
@@ -26,4 +42,21 @@ body > #root {
     margin: 2em;
     border: 1px solid #BDBDBD;
     border-radius: 8px;
+    .text{
+        font-size: 14px;
+        letter-spacing: -0.035em;
+        // color: #828282;
+        text-align: center;
+        font-size: 0.875rem;
+        &.footnote{
+            position: absolute;
+            bottom: -2.5rem;
+            &.credit{
+                right:0
+            }
+            &.creator{
+                left: 0;
+            }
+        }
+    }
 }

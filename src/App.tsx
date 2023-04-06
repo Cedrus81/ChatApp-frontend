@@ -4,6 +4,7 @@ import { useAppDispatch } from "./hooks";
 import { initialTheme } from "./store/slices/styleSlice";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
+import Profile from "./views/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />
+  },
+  {
+    path: "/profile",
+    element: <Profile />
   }
 ]);
 

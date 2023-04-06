@@ -6,12 +6,11 @@
     padding-block: 3rem;
     padding-inline: 3.5rem;
     margin-block: 5rem;
-    h1{
-        font-size: 18px;
-        color: #333;
-    }
     p, pre{
         margin: 0;
+    }
+    a{
+        text-decoration: none;
     }
     form{
         display: flex;
@@ -30,23 +29,7 @@
             line-height: 1.25rem;
         }
     }
-    .text{
-        font-size: 14px;
-        letter-spacing: -0.035em;
-        // color: #828282;
-        text-align: center;
-        font-size: 0.875rem;
-        &.footnote{
-            position: absolute;
-            bottom: -3rem;
-            &.credit{
-                right:0
-            }
-            &.creator{
-                left: 0;
-            }
-        }
-    }
+
     > .social-strategy-list{
         display: flex;
         justify-content: center;
