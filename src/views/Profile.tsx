@@ -1,7 +1,8 @@
 import { FaUserAlt } from "react-icons/fa"
 import { User } from "../types"
 function Profile() {
-    //todo get logged in user from local storage
+    // todo get logged in user from local storage
+    // todo make a fieldOrder array of the keys of the fields in the order we want to display in the UI, then map other them
     const fakeUser: User = {
         id: 23,
         email: 'xanthe.neal@gmail.com',
@@ -11,16 +12,16 @@ function Profile() {
     }
     const { email, name, bio, phone, photo} = fakeUser
   return (
-    <main>
+    <main className="profile-page">
         <header className="profile-header">
-            <h1>Personal info</h1>
-            <h3>Basic info, like your name and photo</h3>
+            <h1 data-theme="headline">Personal info</h1>
+            <h3 data-theme="headline">Basic info, like your name and photo</h3>
         </header>
         <article className="profile window">
             <section className="profile-top">
                 <div>
-                    <h2>Profile</h2>
-                    <p>Some info may be visible to other people</p>
+                    <h2 data-theme="headline">Profile</h2>
+                    <p data-theme="text">Some info may be visible to other people</p>
                 </div>
                 <button data-theme="text background">Edit</button>
             </section>

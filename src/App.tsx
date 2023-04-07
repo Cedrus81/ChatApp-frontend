@@ -1,10 +1,21 @@
 import { useEffect } from "react";
-import {  createBrowserRouter,  RouterProvider} from "react-router-dom"
+import {  createBrowserRouter,  RouterProvider, Outlet} from "react-router-dom"
 import { useAppDispatch } from "./hooks";
 import { initialTheme } from "./store/slices/styleSlice";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Profile from "./views/Profile";
+import Header from "./cmps/Header";
+
+function Layout(){
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  )
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,9 +25,15 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />
   },
+ 
   {
-    path: "/profile",
-    element: <Profile />
+    element: <Layout />,
+    children: [
+      {
+        path: "/profile",
+        element: <Profile />
+      },
+    ]
   }
 ]);
 
