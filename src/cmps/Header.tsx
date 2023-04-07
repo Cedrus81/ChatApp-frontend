@@ -5,10 +5,11 @@ import { FaUserCircle } from "react-icons/fa"
 import { MdGroup } from "react-icons/md"
 import { BiExit } from "react-icons/bi"
 import ThemeToggle from "./ThemeToggle"
-import { useAppDispatch } from "../hooks"
+import { useAppDispatch, useAppSelector } from "../hooks"
 
 function Header() {
     const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.user.loggedInUser)
     const dropDownRef = useRef<HTMLDivElement>(null)
     const dropBtnDownRef = useRef<HTMLButtonElement>(null)
 
@@ -23,6 +24,13 @@ function Header() {
           window.removeEventListener('click', handleToggleDropdown);
         }
       }, [isDropdown])
+
+      function handleLogout(){
+        // todo dispatch logout, navigate back to login on success
+      }
+      function handleMyProfile(){
+        // todo navigate to profile route
+      }
     // todo get current user's name and image
   return (
     <header className="app-header">
@@ -30,12 +38,12 @@ function Header() {
         <button ref={dropBtnDownRef}>
             {/* <div className="user-image"></div> */}
             <div className="placeholder-image" data-theme="call-to-action"><FaUserAlt /></div>
-            <p data-theme="headline">Xanthe Neal</p>
-            <IoMdArrowDropdown />
+            <p data-theme="headline">{user?.name ? user.name : 'Xanthe Neal'}</p>
+            <IoMdArrowDropdown data-theme="headline" />
             <div ref={dropDownRef} className={`dropdown-menu ${isDropdown ? 'active' : ''}`} data-theme="background">
-                <a className="dropdown-link" data-theme="headline" onClick={() => setIsDropdown(false)}><FaUserCircle /> My Profile</a>
-                <a className="dropdown-link" data-theme="headline" onClick={() => setIsDropdown(false)}><MdGroup /> Group Chat</a>
-                <a className="dropdown-link" data-theme="text error" onClick={() => setIsDropdown(false)}><BiExit /> Logout</a>
+                <a className="dropdown-link" data-theme="headline hover" onClick={() => setIsDropdown(false)}><FaUserCircle /> My Profile</a>
+                <a className="dropdown-link" data-theme="headline hover" onClick={() => setIsDropdown(false)}><MdGroup /> Group Chat</a>
+                <a className="dropdown-link" data-theme="text error hover" onClick={() => setIsDropdown(false)}><BiExit /> Logout</a>
             </div>
         </button>
     </header>

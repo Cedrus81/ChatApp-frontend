@@ -1,6 +1,8 @@
 import { FaUserAlt } from "react-icons/fa"
 import { User } from "../types"
+import { useAppSelector } from "../hooks"
 function Profile() {
+    const user = useAppSelector(state => state.user.loggedInUser)
     // todo get logged in user from local storage
     // todo make a fieldOrder array of the keys of the fields in the order we want to display in the UI, then map other them
     const fakeUser: User = {
@@ -10,6 +12,12 @@ function Profile() {
         bio: 'I am a software developer and a big fan of devchallenges...',
         phone: '908249274292',
     }
+    const fieldOrder: string[] =[
+        'name',
+        'bio',
+        'phone',
+        'email',
+    ]
     const { email, name, bio, phone, photo} = fakeUser
   return (
     <main className="profile-page">
@@ -36,22 +44,14 @@ function Profile() {
                     <div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div>
                 </div>
             </section>
-            <section>
-                <span>NAME</span>
-                <h3 data-theme="headline">{name}</h3>
-            </section>
-            <section>
-                <span>BIO</span>
-                <h3 data-theme="headline">{bio}</h3>
-            </section>
-            <section>
-                <span>PHONE</span>
-                <h3 data-theme="headline">{phone}</h3>
-            </section>
-            <section>
-                <span>EMAIL</span>
-                <h3 data-theme="headline">{email}</h3>
-            </section>
+            {fieldOrder.map(field => {
+                return (
+                    <section key={field}>
+                        <span>{field.toUpperCase()}</span>
+                        <h3 data-theme="headline">{fakeUser[field as keyof typeof fakeUser]}</h3>
+                    </section>
+                )
+            })}
             <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
             <p className="footnote credit text" data-theme="text">devChallenges.io</p>
         </article>

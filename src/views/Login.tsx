@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IoMdMail, IoMdLock } from "react-icons/io";
 import {  faGithub, faGoogle, faTwitter, faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks";
 import { signin } from "../store/slices/userSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas";
+import { useForm } from "react-hook-form";
+import { FieldData } from "../types";
 
 import ThemeToggle from "../cmps/ThemeToggle";
 import InputBoxRHF from "../cmps/InputBoxRHF";
-import { useForm } from "react-hook-form";
-import { FieldData } from "../types";
 
 type LoginFormValues = {
   email: string
@@ -19,6 +19,7 @@ type LoginFormValues = {
 
 function Login() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
@@ -52,47 +53,56 @@ const fields: FieldData[] = [
       icon: <FontAwesomeIcon icon={faGithub} />
     },
   }
-  function onSubmit(data: LoginFormValues){
-    console.log('success',data)
+  async function onSubmit(data: LoginFormValues){
+    console.log('isSubmitting', isSubmitting)
+    await dispatch(signin(data))
+    navigate('/profile')
+  }
+  if (isSubmitting){
+    return (
+      <main className='login window'>
+        <h1>submitting</h1>
+      </main>
+    )
   }
   return (
     <main className='login window'>
-      <ThemeToggle dispatch={dispatch} />
-      <h3 data-theme="headline">Auth Wiedersehen</h3>
-      <h2 data-theme="headline">Login</h2>
-      <form onSubmit={(e)=>handleSubmit(onSubmit)(e).catch((e)=>{
-            // todo: add error handling logic
-            console.log('serverside errors etc. logic should be here', e)})}>
-        {fields.map(data => {
-                    return (
-                        <InputBoxRHF 
-                        key={data.id} 
-                        data={data} 
-                        register={register(data.id as keyof LoginFormValues, {onBlur: () => {trigger(data.id as keyof LoginFormValues)}})} 
-                        error={errors[data.id as keyof typeof errors]} 
-                        isDirty={dirtyFields[data.id as keyof typeof dirtyFields]} 
-                        currVal={getValues(data.id as keyof LoginFormValues)}
-                        resetField={()=>resetField(data.id as keyof LoginFormValues)}
-                        />
-                    )
-            })}
-        
-        <button type="submit" className="call-to-action" data-theme="call-to-action">Login</button>
-      </form>
-      <p className="text" data-theme="text">or continue with these social profiles</p>
-      <div className="social-strategy-list">
-        { Object.keys(strategies).map( (media, idx) => {
-          return <button 
-          key={`login-strategy-${Object.keys(strategies)[idx]}`} 
-          className="social-container" 
-          onClick={strategies[media as keyof typeof strategies].handler}
-          data-theme="background text">{strategies[media as keyof typeof strategies].icon}</button>
-        })}
-      </div>
-      <p data-theme="text">Don’t have an account yet? <Link to='/signup'>Register</Link></p>
-      <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
-      <p className="footnote credit text" data-theme="text">devChallenges.io</p>
-    </main>
+        <ThemeToggle dispatch={dispatch} />
+        <h3 data-theme="headline">Auth Wiedersehen</h3>
+        <h2 data-theme="headline">Login</h2>
+        <form onSubmit={(e)=>handleSubmit(onSubmit)(e).catch((e)=>{
+              // todo: add error handling logic
+              console.log('serverside errors etc. logic should be here', e)})}>
+          {fields.map(data => {
+                      return (
+                          <InputBoxRHF 
+                          key={data.id} 
+                          data={data} 
+                          register={register(data.id as keyof LoginFormValues, {onBlur: () => {trigger(data.id as keyof LoginFormValues)}})} 
+                          error={errors[data.id as keyof typeof errors]} 
+                          isDirty={dirtyFields[data.id as keyof typeof dirtyFields]} 
+                          currVal={getValues(data.id as keyof LoginFormValues)}
+                          resetField={()=>resetField(data.id as keyof LoginFormValues)}
+                          />
+                      )
+              })}
+          
+          <button type="submit" className="call-to-action" data-theme="call-to-action">Login</button>
+        </form>
+        <p className="text" data-theme="text">or continue with these social profiles</p>
+        <div className="social-strategy-list">
+          { Object.keys(strategies).map( (media, idx) => {
+            return <button 
+            key={`login-strategy-${Object.keys(strategies)[idx]}`} 
+            className="social-container" 
+            onClick={strategies[media as keyof typeof strategies].handler}
+            data-theme="background text">{strategies[media as keyof typeof strategies].icon}</button>
+          })}
+        </div>
+        <p data-theme="text">Don’t have an account yet? <Link to='/signup'>Register</Link></p>
+        <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
+        <p className="footnote credit text" data-theme="text">devChallenges.io</p>
+      </main>
   )
 }
 

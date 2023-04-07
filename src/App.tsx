@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import {  createBrowserRouter,  RouterProvider, Outlet} from "react-router-dom"
-import { useAppDispatch } from "./hooks";
+import { useEffect, useState } from "react";
+import {  createBrowserRouter,  RouterProvider, Outlet, useNavigate} from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "./hooks";
 import { initialTheme } from "./store/slices/styleSlice";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
@@ -40,8 +40,11 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useAppDispatch()
+  const user = useAppSelector(state => state.user.loggedInUser)
+  const navigate = useNavigate()
   useEffect(() => {
     dispatch(initialTheme())
+    if (user) navigate('/profile')
   }, [])
   
   return (

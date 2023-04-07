@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { IoMdLock, IoMdMail, IoMdPerson, IoMdPhonePortrait, IoIosFlag } from "react-icons/io"
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { countries } from "../data"
 import { signupSchema } from "../schemas";
 import { useAppDispatch } from "../hooks";
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 
 import ThemeToggle from "../cmps/ThemeToggle";
 import InputBoxRHF from "../cmps/InputBoxRHF";
+import { signin, signup } from "../store/slices/userSlice";
 
 type SignupFormValues = {
     email: string
@@ -22,6 +23,7 @@ type SignupFormValues = {
 }
 function Signup() {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<SignupFormValues>({
         resolver: yupResolver(signupSchema),
         defaultValues: {
@@ -63,8 +65,7 @@ function Signup() {
         }],
     ]
 
-    function onSubmit(data: SignupFormValues){
-        console.log('success',data)
+    async function onSubmit(data: SignupFormValues){
         const cleanedData = Object.keys(data)
         .filter(key => data[key as keyof SignupFormValues] !== '')
         .reduce((acc: any, key) =>{
@@ -77,10 +78,10 @@ function Signup() {
             delete cleanedData.phone
         }
         delete cleanedData.dial
-
-        console.log(cleanedData)
-        // todo dispatch and action and redirect after
+        await dispatch(signup(data))
+        navigate('/profile')
     }
+
     const CountryDatalist = useMemo(() =>
             <datalist id="country-codes" >
                 {countries.map( country => 
