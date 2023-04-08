@@ -5,11 +5,15 @@ import { FaUserCircle } from "react-icons/fa"
 import { MdGroup } from "react-icons/md"
 import { BiExit } from "react-icons/bi"
 import ThemeToggle from "./ThemeToggle"
-import { useAppDispatch, useAppSelector } from "../hooks"
+import { useAppDispatch } from "../hooks"
+import { User } from "../types"
 
-function Header() {
+type HeaderProps = {
+  user: User | null
+}
+
+function Header({user}: HeaderProps) {
     const dispatch = useAppDispatch()
-    const user = useAppSelector(state => state.user.loggedInUser)
     const dropDownRef = useRef<HTMLDivElement>(null)
     const dropBtnDownRef = useRef<HTMLButtonElement>(null)
 
@@ -32,6 +36,7 @@ function Header() {
         // todo navigate to profile route
       }
     // todo get current user's name and image
+    if(!user) return (<></>)
   return (
     <header className="app-header">
         <ThemeToggle dispatch={dispatch} />

@@ -11,7 +11,8 @@ import { useForm } from "react-hook-form";
 
 import ThemeToggle from "../cmps/ThemeToggle";
 import InputBoxRHF from "../cmps/InputBoxRHF";
-import { signin, signup } from "../store/slices/userSlice";
+import { signup } from "../store/slices/userSlice";
+import LoadingWheel from "../cmps/LoadingWheel";
 
 type SignupFormValues = {
     email: string
@@ -90,6 +91,13 @@ function Signup() {
                   </option>  
                 )}
             </datalist>, [countries])
+      if (isSubmitting){
+        return (
+          <main className='login window'>
+              <LoadingWheel title="Signing you in..." />
+          </main>
+        )
+      }
   return (
     <main className='login window'>
         <ThemeToggle dispatch={dispatch} />

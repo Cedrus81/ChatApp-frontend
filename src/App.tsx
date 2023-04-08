@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {  createBrowserRouter,  RouterProvider, Outlet, useNavigate} from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { initialTheme } from "./store/slices/styleSlice";
@@ -6,19 +6,32 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import Header from "./cmps/Header";
+import { User } from "./types";
 
 function Layout(){
+  const navigate = useNavigate()
+  const user = useAppSelector(state => state.user.loggedInUser)
+//   const user: User = {
+//     id: 23,
+//     email: 'xanthe.neal@gmail.com',
+//     name: 'Arawaz',
+//     bio: 'I am a software developer and a big fan of devchallenges...',
+//     phone: '908249274292',
+// }
+  useEffect(() =>{
+    if (!user) navigate('/login')
+  },[user])
   return (
     <>
-      <Header />
-      <Outlet />
+      <Header user={ user } />
+      <Outlet context={{ user }} />
     </>
   )
 }
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -30,7 +43,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/profile",
+        path: "/",
         element: <Profile />
       },
     ]
@@ -40,11 +53,8 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useAppDispatch()
-  const user = useAppSelector(state => state.user.loggedInUser)
-  const navigate = useNavigate()
   useEffect(() => {
     dispatch(initialTheme())
-    if (user) navigate('/profile')
   }, [])
   
   return (

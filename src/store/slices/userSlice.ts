@@ -5,6 +5,7 @@ import { storageService } from '../../services/local-storage.service';
 import type { RootState } from '../index'
 import { SignupDto } from '../../dto';
 
+const USER_KEY = 'ChatApp_loggedInUser'
 
 interface userState {
     loggedInUser: User | null;
@@ -51,7 +52,7 @@ export const userSlice = createSlice({
         //     }
         // })
         builder.addCase(logout.fulfilled, state => {
-            storageService.removeItem('loggedInUser')
+            storageService.removeItem(USER_KEY)
             state.loggedInUser = null
         })
     },
@@ -61,6 +62,6 @@ export const userSlice = createSlice({
 export default userSlice.reducer
 
 function setLoggedInUser(state: userState, {payload}: PayloadAction<User>){
-    storageService.setItem('loggedInUser', payload)
+    storageService.setItem(USER_KEY, payload)
     state.loggedInUser = payload
 }

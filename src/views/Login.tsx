@@ -11,6 +11,7 @@ import { FieldData } from "../types";
 
 import ThemeToggle from "../cmps/ThemeToggle";
 import InputBoxRHF from "../cmps/InputBoxRHF";
+import LoadingWheel from "../cmps/LoadingWheel";
 
 type LoginFormValues = {
   email: string
@@ -61,7 +62,7 @@ const fields: FieldData[] = [
   if (isSubmitting){
     return (
       <main className='login window'>
-        <h1>submitting</h1>
+          <LoadingWheel title="Logging you in..." />
       </main>
     )
   }
@@ -99,7 +100,7 @@ const fields: FieldData[] = [
             data-theme="background text">{strategies[media as keyof typeof strategies].icon}</button>
           })}
         </div>
-        <p data-theme="text">Don’t have an account yet? <Link to='/signup'>Register</Link></p>
+        <p className="text" data-theme="text">Don’t have an account yet? <Link to='/signup'>Register</Link></p>
         <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
         <p className="footnote credit text" data-theme="text">devChallenges.io</p>
       </main>
