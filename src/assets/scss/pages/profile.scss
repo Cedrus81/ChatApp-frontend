@@ -21,6 +21,10 @@
                     border: 1px solid #828282;
                     border-radius: 12px;
                     padding: 0.5rem 2rem;
+                    transition: 0.2s;
+                    &:hover{
+                        box-shadow: 0 0 6px 4px rgba(#BDBDBD, 0.2), inset 0 0 6px 4px rgba(#BDBDBD, 0.8);
+                    }
                 }
             }
             &:last-of-type{
@@ -36,22 +40,6 @@
                 letter-spacing: -0.035em;
                 font-weight: 500;
                 font-size: 18px;
-            }
-            .placeholder-photo{
-                &-container{
-                    flex: 3;
-                }
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 72px;
-                height: 72px;
-                margin-block: 0.6rem;
-                border-radius: 0.5rem;
-                color: white;
-                svg{
-                    font-size: 3rem;
-                }
             }
         }
     }

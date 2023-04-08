@@ -3,7 +3,7 @@ import { userService } from '../../services/user.service';
 import { User } from '../../types'
 import { storageService } from '../../services/local-storage.service';
 import type { RootState } from '../index'
-import { SignupDto } from '../../dto';
+import { SignupDto, UpdateUserDto } from '../../dto';
 
 const USER_KEY = 'ChatApp_loggedInUser'
 
@@ -32,6 +32,11 @@ export const signin = createAsyncThunk('signin', async (dto: {email: string, pas
     }
 })
 
+export const updateUser = createAsyncThunk('updateUser', async (dto: UpdateUserDto, {rejectWithValue} )=>{
+    if (!dto.id) return rejectWithValue('Had an issue updating the user, id not found..')
+    return await userService.updateUser(dto)
+})
+
 export const logout = createAsyncThunk('logout', () =>{
     return userService.logout()
 })
@@ -44,6 +49,8 @@ export const userSlice = createSlice({
         builder.addCase(signup.fulfilled, setLoggedInUser)
 
         builder.addCase(signin.fulfilled, setLoggedInUser)
+
+        builder.addCase(updateUser.fulfilled, setLoggedInUser)
 
         builder.addCase(logout.fulfilled, state => {
             storageService.removeItem(USER_KEY)

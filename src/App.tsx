@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import {  createBrowserRouter,  RouterProvider, Outlet, useNavigate} from "react-router-dom"
+import { createBrowserRouter,  RouterProvider, Outlet, useNavigate} from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { initialTheme } from "./store/slices/styleSlice";
 import Login from "./views/Login";
@@ -7,12 +7,13 @@ import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import Header from "./cmps/Header";
 import { User } from "./types";
+import ProfileEdit from "./views/ProfileEdit";
 
 function Layout(){
   const navigate = useNavigate()
   const user = useAppSelector(state => state.user.loggedInUser)
   useEffect(() =>{
-    if (!user) navigate('/login')
+    if (!user) navigate('/')
   },[user])
   return (
     <>
@@ -24,21 +25,24 @@ function Layout(){
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
   },
   {
     path: "/signup",
     element: <Signup />
   },
- 
   {
     element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <Profile />
+        path: "/my-profile",
+        element: <Profile />,
       },
+      {
+        path: "/profile-edit",
+        element: <ProfileEdit />
+      }
     ]
   }
 ]);

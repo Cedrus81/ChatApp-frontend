@@ -1,8 +1,9 @@
 import { httpService } from "./http.service"
-import { SignupDto } from "../dto"
+import { SignupDto, UpdateUserDto } from "../dto"
 export const userService = {
    signin,
    signup,
+   updateUser,
    logout
 }
 
@@ -20,4 +21,8 @@ function signin(dto: {email: string, password: string}) {
 
 function logout(){
     return httpService.post('auth/logout', null)
+}
+
+function updateUser(dto: UpdateUserDto){
+    return httpService.patch(`users/${dto.id}`, dto)
 }

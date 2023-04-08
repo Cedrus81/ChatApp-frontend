@@ -5,23 +5,18 @@ import { Link, useNavigate } from "react-router-dom"
 import { countries } from "../data"
 import { signupSchema } from "../schemas";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { FieldData } from "../types";
+import { FieldData, SignupFormValues } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { signup } from "../store/slices/userSlice";
 
 import ThemeToggle from "../cmps/ThemeToggle";
 import InputBoxRHF from "../cmps/InputBoxRHF";
-import { signup } from "../store/slices/userSlice";
 import LoadingWheel from "../cmps/LoadingWheel";
+import CountryDatalist from "../cmps/CountryDatalist";
+import { utilService } from "../services/utils.service";
 
-type SignupFormValues = {
-    email: string
-    password: string
-    name:string
-    bio: string
-    phone: string
-    dial: string
-}
+
 function Signup() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -47,7 +42,7 @@ function Signup() {
         }],
         [{id: 'password',
          icon: <IoMdLock />,
-         title: '5-20 characters, at least 1 of each: Capital, lowercase, digit'}],
+         title: '8-20 characters, at least 1 of each: Capital, lowercase, digit'}],
         [{ id: 'name',
         icon: <IoMdPerson/>,
         }],
@@ -71,30 +66,12 @@ function Signup() {
     ]
 
     async function onSubmit(data: SignupFormValues){
-        const cleanedData = Object.keys(data)
-        .filter(key => data[key as keyof SignupFormValues] !== '')
-        .reduce((acc: any, key) =>{
-            acc[key] = data[key as keyof SignupFormValues]
-            return acc
-        },{})
-        if(cleanedData.phone && cleanedData.dial){
-            cleanedData.phone = cleanedData.dial + '-' + cleanedData.phone
-        } else {
-            delete cleanedData.phone
-        }
-        delete cleanedData.dial
-        await dispatch(signup(data))
-        navigate('/')
+        const dto = utilService.signupToDto(data)
+        await dispatch(signup(dto))
+        navigate('/my-profile')
     }
 
-    const CountryDatalist = useMemo(() =>
-            <datalist id="country-codes" >
-                {countries.map( country => 
-                  <option key={country.code} value={country.dial_code}>
-                    {country.flag + ' ' + country.name}
-                  </option>  
-                )}
-            </datalist>, [countries])
+    
       if (isSubmitting){
         return (
           <main className='login window'>
@@ -133,7 +110,7 @@ function Signup() {
             })}
             </div>
             )})}
-            {CountryDatalist}
+            <CountryDatalist />
             <button type="submit" className="call-to-action" data-theme="call-to-action">Sign up</button>
         </form>
         <p className="text" data-theme="text">Already have a user? <Link to='/'>Login page</Link></p>

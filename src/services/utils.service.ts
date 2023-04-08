@@ -1,5 +1,23 @@
-export const utilService ={
+import { SignupFormValues } from "../types"
 
+export const utilService ={
+ signupToDto
+}
+
+function signupToDto(data: SignupFormValues){
+    const dto = Object.keys(data)
+        .filter(key => data[key as keyof SignupFormValues] !== '')
+        .reduce((acc: any, key: string) =>{
+            acc[key] = data[key as keyof SignupFormValues]
+            return acc
+        },{})
+        if(dto.phone && dto.dial){
+            dto.phone = dto.dial + '-' + dto.phone
+        } else {
+            delete dto.phone
+        }
+        delete dto.dial
+        return dto
 }
 
 function debounce(func: Function, wait: number = 3000) {

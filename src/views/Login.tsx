@@ -27,7 +27,7 @@ function Login() {
   const navigate = useNavigate()
   const user = useAppSelector(state => state.user.loggedInUser)
   useEffect(() => {
-    if(user) navigate('/')
+    if(user) navigate('/profile')
 })
   const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
@@ -65,7 +65,7 @@ const fields: FieldData[] = [
   async function onSubmit(data: LoginFormValues){
     console.log('isSubmitting', isSubmitting)
     await dispatch(signin(data))
-    navigate('/')
+    navigate('/my-profile')
   }
   if (isSubmitting){
     return (

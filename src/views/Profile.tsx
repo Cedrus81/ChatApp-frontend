@@ -1,14 +1,11 @@
 import { FaUserAlt } from "react-icons/fa"
 import { useUser } from "../hooks"
-
+import { fieldOrder } from "../data"
+import { Link } from "react-router-dom"
+//todo add in photo logic
 function Profile() {
     const {user} = useUser()
-    const fieldOrder: string[] =[
-        'name',
-        'bio',
-        'phone',
-        'email',
-    ]
+
     if(!user){
         return (<>
         </>)
@@ -25,18 +22,19 @@ function Profile() {
                         <h2 data-theme="headline">Profile</h2>
                         <p data-theme="text">Some info may be visible to other people</p>
                     </div>
-                    <button data-theme="text background">Edit</button>
+                    <Link to="/profile-edit">
+                        <button data-theme="text background">Edit</button>
+                    </Link>
                 </section>
                 <section>
                     <span>PHOTO</span>
-
-                    {/* if user has photo */}
-                    {/* <img src="" alt="" /> */}
-
-                    {/* if not */}
-                    <div className="placeholder-photo-container">
+                    {user.photo ?
+                     (<></>) 
+                     : 
+                     (
+                     <div className="placeholder-photo-container">
                         <div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div>
-                    </div>
+                     </div>)}
                 </section>
                 {fieldOrder.map(field => {
                     return (

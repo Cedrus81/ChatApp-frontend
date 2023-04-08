@@ -13,6 +13,9 @@ export const httpService = {
     get(endpoint:string, data:any) {
         return ajax(endpoint, 'GET', data)
     },
+    patch(endpoint:string, data:any) {
+        return ajax(endpoint, 'PATCH', data)
+    },
     post(endpoint:string, data:any) {
             return ajax(endpoint, 'POST', data)
     },

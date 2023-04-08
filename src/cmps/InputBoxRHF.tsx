@@ -46,7 +46,7 @@ function InputBoxRHF({register, data, error, isDirty, currVal, resetField}: Inpu
           {shouldDisplayError() && <p className="error-msg" data-theme="error text">{error?.message?.toString()}</p>}
     </div>
       )
-    },[currVal])
+    },[currVal, error])
   return (
     <>
       {memoizedInputBox}

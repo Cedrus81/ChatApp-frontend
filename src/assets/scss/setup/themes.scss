@@ -83,8 +83,11 @@ $themes: (
             color: getLastAttribute($theme);
         }
     }
-    [data-theme*="hover"]:hover{
-        background-color: getLastAttribute($theme);
+    [data-theme*="hover"]{
+        &:hover,
+        &.active{
+            background-color: getLastAttribute($theme);
+        }
     }
 }
 
