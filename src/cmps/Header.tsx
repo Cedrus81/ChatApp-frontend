@@ -7,6 +7,8 @@ import { BiExit } from "react-icons/bi"
 import ThemeToggle from "./ThemeToggle"
 import { useAppDispatch } from "../hooks"
 import { User } from "../types"
+import { logout } from "../store/slices/userSlice"
+import { useNavigate } from "react-router-dom"
 
 type HeaderProps = {
   user: User | null
@@ -16,7 +18,7 @@ function Header({user}: HeaderProps) {
     const dispatch = useAppDispatch()
     const dropDownRef = useRef<HTMLDivElement>(null)
     const dropBtnDownRef = useRef<HTMLButtonElement>(null)
-
+    const navigate = useNavigate()
     const [isDropdown, setIsDropdown] = useState<boolean>(false)
     useEffect(() => {
         const handleToggleDropdown = ({target}: MouseEvent) => {
@@ -29,8 +31,11 @@ function Header({user}: HeaderProps) {
         }
       }, [isDropdown])
 
-      function handleLogout(){
+      async function handleLogout(){
         // todo dispatch logout, navigate back to login on success
+        await dispatch(logout())
+        navigate('/login')
+        
       }
       function handleMyProfile(){
         // todo navigate to profile route
@@ -48,7 +53,7 @@ function Header({user}: HeaderProps) {
             <div ref={dropDownRef} className={`dropdown-menu ${isDropdown ? 'active' : ''}`} data-theme="background">
                 <a className="dropdown-link" data-theme="headline hover" onClick={() => setIsDropdown(false)}><FaUserCircle /> My Profile</a>
                 <a className="dropdown-link" data-theme="headline hover" onClick={() => setIsDropdown(false)}><MdGroup /> Group Chat</a>
-                <a className="dropdown-link" data-theme="text error hover" onClick={() => setIsDropdown(false)}><BiExit /> Logout</a>
+                <a className="dropdown-link" data-theme="text error hover" onClick={handleLogout}><BiExit /> Logout</a>
             </div>
         </button>
     </header>

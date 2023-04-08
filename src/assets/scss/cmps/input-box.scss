@@ -11,7 +11,7 @@
         transform: translateY(-50%);
         left: 1rem;
         padding-inline: 0.5rem;
-        background-color: transparent;
+        border-radius: 8px;
         transition: 0.2s;
         pointer-events: none;
         svg{
@@ -34,7 +34,6 @@
         &.floating + label{
             top: 0;
             left: 0.75rem;
-            border-radius: 8px;
         }
         &:-internal-autofill-selected ~ button{
             background-color: #333;

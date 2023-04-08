@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IoMdMail, IoMdLock } from "react-icons/io";
 import {  faGithub, faGoogle, faTwitter, faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { signin } from "../store/slices/userSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas";
@@ -17,10 +18,17 @@ type LoginFormValues = {
   email: string
   password: string
 }
+// todo cedentials that work: 
+// erez@gmail.com
+// aaaaaa1A
 
 function Login() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const user = useAppSelector(state => state.user.loggedInUser)
+  useEffect(() => {
+    if(user) navigate('/')
+})
   const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
@@ -57,7 +65,7 @@ const fields: FieldData[] = [
   async function onSubmit(data: LoginFormValues){
     console.log('isSubmitting', isSubmitting)
     await dispatch(signin(data))
-    navigate('/profile')
+    navigate('/')
   }
   if (isSubmitting){
     return (

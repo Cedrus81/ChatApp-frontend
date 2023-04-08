@@ -1,10 +1,10 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { IoMdLock, IoMdMail, IoMdPerson, IoMdPhonePortrait, IoIosFlag } from "react-icons/io"
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom"
 import { countries } from "../data"
 import { signupSchema } from "../schemas";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { FieldData } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -25,6 +25,10 @@ type SignupFormValues = {
 function Signup() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const user = useAppSelector(state => state.user.loggedInUser)
+    useEffect(() => {
+        if(user) navigate('/')
+    })
     const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<SignupFormValues>({
         resolver: yupResolver(signupSchema),
         defaultValues: {
@@ -80,7 +84,7 @@ function Signup() {
         }
         delete cleanedData.dial
         await dispatch(signup(data))
-        navigate('/profile')
+        navigate('/')
     }
 
     const CountryDatalist = useMemo(() =>
@@ -98,7 +102,9 @@ function Signup() {
           </main>
         )
       }
-  return (
+
+      
+    return (
     <main className='login window'>
         <ThemeToggle dispatch={dispatch} />
         <h2 data-theme="headline">Welcome to Auth Wiedersehen!</h2>
@@ -134,7 +140,7 @@ function Signup() {
         <p className="footnote creator text" data-theme="text">created by <u><b>Erez Eitan</b></u></p>
         <p className="footnote credit text" data-theme="text">devChallenges.io</p>
     </main>
-  )
+    )
 }
 
 export default Signup

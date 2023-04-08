@@ -11,13 +11,6 @@ import { User } from "./types";
 function Layout(){
   const navigate = useNavigate()
   const user = useAppSelector(state => state.user.loggedInUser)
-//   const user: User = {
-//     id: 23,
-//     email: 'xanthe.neal@gmail.com',
-//     name: 'Arawaz',
-//     bio: 'I am a software developer and a big fan of devchallenges...',
-//     phone: '908249274292',
-// }
   useEffect(() =>{
     if (!user) navigate('/login')
   },[user])

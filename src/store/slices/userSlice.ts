@@ -13,7 +13,7 @@ interface userState {
 
 
 const initialState: userState = {
-    loggedInUser: null,
+    loggedInUser: storageService.getItem(USER_KEY),
 }
 
 export const signup = createAsyncThunk('signup', (dto: SignupDto) => {
@@ -45,12 +45,6 @@ export const userSlice = createSlice({
 
         builder.addCase(signin.fulfilled, setLoggedInUser)
 
-        // builder.addCase(signin.rejected, (state, action) => {
-        //     const { status } = JSON.parse(action.payload as string)
-        //     if(status === 500) {
-        //         state.errorMsg = 'User not found: The credentials might be incorrect'
-        //     }
-        // })
         builder.addCase(logout.fulfilled, state => {
             storageService.removeItem(USER_KEY)
             state.loggedInUser = null
