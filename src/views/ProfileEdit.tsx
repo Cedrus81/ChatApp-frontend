@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form"
 import { FieldData, SignupFormValues } from "../types"
 import { IoIosFlag, IoMdLock, IoMdMail, IoMdPerson, IoMdPhonePortrait } from "react-icons/io"
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs"
-
-import CountryDatalist from "../cmps/CountryDatalist";
-import InputBoxRHF from "../cmps/InputBoxRHF"
+import { fields, photoData } from "../data"
 import { utilService } from "../services/utils.service"
 import { updateUser } from "../store/slices/userSlice"
+
+import InputBoxRHF from "../cmps/InputBoxRHF"
+import CountryDatalist from "../cmps/CountryDatalist";
 import LoadingWheel from "../cmps/LoadingWheel"
+import UploadWidget from "../cmps/UploadWidget"
 
 function ProfileEdit() {
   const dispatch = useAppDispatch()
@@ -21,7 +23,7 @@ function ProfileEdit() {
     return (<></>)
   }
 
-  const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<SignupFormValues>({
+  const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues, setValue} = useForm<SignupFormValues>({
     resolver: yupResolver(editSchema),
     defaultValues: {
         email: '',
@@ -32,40 +34,32 @@ function ProfileEdit() {
         dial: ''
     },
   })
-  const fields: FieldData[][] = [
-    [{ id: 'name',
-    icon: <IoMdPerson/>,
-    }],
-    [ { id: 'bio',
-     icon: <BsFillFileEarmarkPersonFill />,
-     }],
-     [
-          {
-              id: 'dial',
-              icon: <IoIosFlag />,
-              flexRatio: 1,
-              list: 'country-codes'
-          },
-          {
-              id: 'phone',
-              icon: <IoMdPhonePortrait />,
-              flexRatio: 2,
-              title: '10 digits length, e.g. 0541234567'
-          }
-      ],
-    [{ id: 'email',
-     icon: <IoMdMail />,
-    }],
-    [{id: 'password',
-     icon: <IoMdLock />,
-     title: '8-20 characters, at least 1 of each: Capital, lowercase, digit'}],
+  // todo reorganize l8r with fieldOrder
+  const fieldOrder: string[] = [
+    'name',
+    'bio',
+    'phone',
+    'email',
+    'password'
   ]
+
+  function setUserPhoto(url: string){
+    if(!user) throw new Error('user not found')
+
+    const dto = {
+      id: user.id,
+      photo: url
+    }
+    dispatch(updateUser(dto))
+  }
 
   async function onSubmit(data: SignupFormValues){
     if(!user) throw new Error('user not found')
 
-    const dto = utilService.signupToDto(data)
-    dto.id = user.id
+    const dto = {
+      id: user.id,
+      ...utilService.signupToDto(data),
+    }
     await dispatch(updateUser(dto))
     navigate('/my-profile')
   }
@@ -88,12 +82,13 @@ function ProfileEdit() {
           <h2 data-theme="headline">Change Info</h2>
           <p data-theme="text">Changes will be reflected to every services</p>
         </section>
+        <section>
+            <UploadWidget setValue={(value: string)=> setUserPhoto(value)} user={user} />
+        </section>
         <form onSubmit={(e)=>handleSubmit(onSubmit)(e).catch((e)=>{
             // todo: add error handling logic
             console.log('serverside errors etc. logic should be here', e)})}>
-          <section className="change-photo">
 
-          </section>
           {fields.map((field) => { return (
                 <div key={`${field[0].id}-container`} className={field.length > 1 ? 'divided-input-box' : 'full-input-box'}>
                 {field.map(data => {
@@ -112,7 +107,7 @@ function ProfileEdit() {
             </div>
             )})}
             <CountryDatalist />
-            <button type="submit" className="call-to-action" data-theme="call-to-action">Sign up</button>
+            <button type="submit" className="call-to-action" data-theme="call-to-action">Save</button>
         </form>
       </article>
     </main>

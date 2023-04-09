@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { storageService } from "../../services/local-storage.service";
+
+const THEME_KEY = 'ChatApp_theme'
+
 interface styleState {
     theme: string
 }
@@ -15,12 +18,12 @@ export const styleSlice = createSlice({
         setTheme: (state, action: PayloadAction<string>) => {
             document.querySelector('body')?.classList.toggle(state.theme as string)
             state.theme = action.payload
-            storageService.setItem('theme', state.theme)
+            storageService.setItem(THEME_KEY, state.theme)
             document.querySelector('body')?.classList.toggle(state.theme)
         },
         initialTheme: (state =>{
-            state.theme = storageService.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-            if (!storageService.getItem('theme')) storageService.setItem('theme', state.theme)
+            state.theme = storageService.getItem(THEME_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            if (!storageService.getItem(THEME_KEY)) storageService.setItem(THEME_KEY, state.theme)
             document.querySelector('body')?.classList.toggle(state.theme)
         })
     }

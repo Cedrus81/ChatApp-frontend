@@ -44,3 +44,18 @@
         }
     }
 }
+
+
+
+.profile-photo-container{
+    flex: 3;
+}
+
+
+img.user-photo,
+.placeholder-photo{
+    width: 72px;
+    height: 72px;
+    margin-block: 0.6rem;
+    border-radius: 0.5rem;
+}

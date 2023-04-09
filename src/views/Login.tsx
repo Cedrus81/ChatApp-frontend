@@ -27,7 +27,7 @@ function Login() {
   const navigate = useNavigate()
   const user = useAppSelector(state => state.user.loggedInUser)
   useEffect(() => {
-    if(user) navigate('/profile')
+    if(user) navigate('/my-profile')
 })
   const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),

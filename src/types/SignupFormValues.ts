@@ -5,4 +5,5 @@ export type SignupFormValues = {
     bio: string
     phone: string
     dial: string
+    photo: string
 }
