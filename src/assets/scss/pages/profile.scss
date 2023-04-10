@@ -51,11 +51,11 @@
     flex: 3;
 }
 
-
-img.user-photo,
+.user-photo,
 .placeholder-photo{
     width: 72px;
     height: 72px;
+    background-size: cover;
     margin-block: 0.6rem;
     border-radius: 0.5rem;
 }

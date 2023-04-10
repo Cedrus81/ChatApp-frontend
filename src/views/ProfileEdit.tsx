@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useAppDispatch, useUser } from "../hooks"
+import { useAppDispatch, useSessionExpired, useUser } from "../hooks"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { editSchema } from "../schemas"
 import { useForm } from "react-hook-form"
@@ -16,12 +16,10 @@ import LoadingWheel from "../cmps/LoadingWheel"
 import UploadWidget from "../cmps/UploadWidget"
 
 function ProfileEdit() {
+  useSessionExpired()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { user } = useUser()
-  if(!user){
-    return (<></>)
-  }
+  const user = useUser()
 
   const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues, setValue} = useForm<SignupFormValues>({
     resolver: yupResolver(editSchema),
@@ -43,14 +41,15 @@ function ProfileEdit() {
     'password'
   ]
 
-  function setUserPhoto(url: string){
+  async function setUserPhoto(url: string){
     if(!user) throw new Error('user not found')
 
     const dto = {
       id: user.id,
       photo: url
     }
-    dispatch(updateUser(dto))
+    await dispatch(updateUser(dto))
+    console.log('updated successfully:', user)
   }
 
   async function onSubmit(data: SignupFormValues){

@@ -1,7 +1,14 @@
 import { SignupFormValues } from "../types"
 
 export const utilService ={
- signupToDto
+ signupToDto,
+ cloudinaryThumbnail
+}
+
+function cloudinaryThumbnail(url: string, size: number){
+    const splitUrl = url.split('upload/')
+    splitUrl[1] = `c_limit,h_${size},w_${size}/` + splitUrl[1]
+    return splitUrl.join('upload/')
 }
 
 function signupToDto(data: SignupFormValues){

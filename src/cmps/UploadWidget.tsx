@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import { User } from "../types"
-import { FaUserAlt } from "react-icons/fa"
+import { BsFillCameraFill } from "react-icons/bs"
+import { utilService } from "../services/utils.service"
 
 type UploadWidgetProps = {
   setValue: (value: string) => void
@@ -28,18 +29,16 @@ function UploadWidget({ setValue, user }: UploadWidgetProps) {
   return (
     <div className="widget-container">
       {user.photo ? 
-      (<img 
-      src={`url(${user.photo})`} 
-      alt="user-photo"
+      (<div 
       className="user-photo" 
       onClick={() => widgetRef.current.open()} 
-      style={{backgroundImage: user.photo ? `url(${user.photo})` : ``}} />
+      style={{backgroundImage: user.photo ? `url(${utilService.cloudinaryThumbnail(user.photo, 72)})` : ``}}></div>
       ) 
       : 
       (<div 
         className="placeholder-photo"
         onClick={() => widgetRef.current.open()} 
-        data-theme="call-to-action"><FaUserAlt /></div>)
+        data-theme="call-to-action"><BsFillCameraFill /></div>)
       }
       </div>
   )

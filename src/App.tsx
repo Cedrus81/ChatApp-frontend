@@ -10,11 +10,7 @@ import { User } from "./types";
 import ProfileEdit from "./views/ProfileEdit";
 
 function Layout(){
-  const navigate = useNavigate()
   const user = useAppSelector(state => state.user.loggedInUser)
-  useEffect(() =>{
-    if (!user) navigate('/')
-  },[user])
   return (
     <>
       <Header user={ user } />

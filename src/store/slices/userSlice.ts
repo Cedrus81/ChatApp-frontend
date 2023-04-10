@@ -44,7 +44,11 @@ export const logout = createAsyncThunk('logout', () =>{
 export const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        clearUser:  (state: userState) => {
+            removeLoggedInUser(state)
+        }
+    },
     extraReducers(builder) {
         builder.addCase(signup.fulfilled, setLoggedInUser)
 
@@ -52,17 +56,21 @@ export const userSlice = createSlice({
 
         builder.addCase(updateUser.fulfilled, setLoggedInUser)
 
-        builder.addCase(logout.fulfilled, state => {
-            storageService.removeItem(USER_KEY)
-            state.loggedInUser = null
-        })
+        builder.addCase(logout.fulfilled, state => removeLoggedInUser(state))
     },
     
 })
+
+export const { clearUser } = userSlice.actions
 
 export default userSlice.reducer
 
 function setLoggedInUser(state: userState, {payload}: PayloadAction<User>){
     storageService.setItem(USER_KEY, payload)
     state.loggedInUser = payload
+}
+
+function removeLoggedInUser(state: userState){
+    storageService.removeItem(USER_KEY)
+    state.loggedInUser = null
 }
