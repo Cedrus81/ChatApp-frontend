@@ -1,10 +1,9 @@
 import { FaUserAlt } from "react-icons/fa"
-import { useSessionExpired, useUser } from "../hooks"
+import { useUser } from "../hooks"
 import { Link } from "react-router-dom"
 import { utilService } from "../services/utils.service"
-//todo add in photo logic
+
 function Profile() {
-    useSessionExpired()
     const user = useUser()
     const fieldOrder: string[] = [
         'name',
@@ -34,7 +33,7 @@ function Profile() {
                     {user.photo ?
                       (<div 
                         className="user-photo" 
-                        style={{backgroundImage: user.photo ? `url(${utilService.cloudinaryThumbnail(user.photo, 72)})` : ``}}></div>
+                        style={{backgroundImage: user.photo ? `url(${utilService.cloudinaryThumbnail(user.photo, 80)})` : ``}}></div>
                         ) 
                      : 
                      (<div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div>)}

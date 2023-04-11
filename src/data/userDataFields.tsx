@@ -37,13 +37,13 @@ export const fields: FieldData[][] = [
      }],
  ]
 
- export const photoData: FieldData = {
-    id: 'photo',
-    icon: <BsFillCameraFill />,
-    title: 'Your profile picture URL will be displayed here',
-    disabled: true,
-    style: {
-        flex: 1,
-        borderInlineEnd: 0,
-    }
- }
+//  export const photoData: FieldData = {
+//     id: 'photo',
+//     icon: <BsFillCameraFill />,
+//     title: 'Your profile picture URL will be displayed here',
+//     disabled: true,
+//     style: {
+//         flex: 1,
+//         borderInlineEnd: 0,
+//     }
+//  }

@@ -9,6 +9,7 @@ import { useAppDispatch } from "../hooks"
 import { User } from "../types"
 import { logout } from "../store/slices/userSlice"
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
+import { utilService } from "../services/utils.service"
 
 type HeaderProps = {
   user: User | null
@@ -40,17 +41,20 @@ function Header({user}: HeaderProps) {
         setIsDropdown(false)
         navigate('/my-profile')
       }
-      function isActive(to: string){
-        return to === location
-      }
     // todo get current user's name and image
-    if(!user) return (<></>)
+    // if(!user) return (<></>)
   return (
     <header className="app-header">
         <ThemeToggle dispatch={dispatch} />
         <button ref={dropBtnDownRef}>
-            {/* <div className="user-image"></div> */}
-            <div className="placeholder-image" data-theme="call-to-action"><FaUserAlt /></div>
+          {user!.photo ?
+            (<div 
+            className="user-photo" 
+            style={{backgroundImage: user!.photo ? `url(${utilService.cloudinaryThumbnail(user!.photo, 80)})` : ``}}></div>
+            ) 
+            : 
+            (<div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div>)}
+            {/* <div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div> */}
             <p data-theme="headline">{user?.name ? user.name : 'Xanthe Neal'}</p>
             <IoMdArrowDropdown data-theme="headline" />
             <div ref={dropDownRef} className={`dropdown-menu ${isDropdown ? 'active' : ''}`} data-theme="background">

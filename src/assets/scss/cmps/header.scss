@@ -1,6 +1,7 @@
 .app-header{
     display:flex;
     align-self: flex-end;
+    gap: 0.3em;
     padding-inline-end: 5rem;
     padding-block-start: 1.5rem;
     button{
@@ -10,28 +11,29 @@
         gap: 0.75rem;
         border: 0;
         background-color: transparent;
-        .placeholder-image{
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .user-photo,
+        .placeholder-photo{
             height: 2.2rem;
             width: 2.2rem;
-            color: white;
-            font-size: 1.2rem;
+            background-size: cover;
+            margin: 0;
+
+        }
+        .placeholder-photo{
+            pointer-events: none;
             border-radius: 8px;
             svg{
                 pointer-events: none;
+                font-size: 1.2rem;
             }
         }
         p{
+            margin: 0;
             pointer-events: none;
             font-weight: 700;
         }
         & > svg {
             pointer-events: none;
-            position: relative;
-            left: 1px;
             font-size: 1.5rem;
         }
     }

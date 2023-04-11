@@ -1,0 +1,43 @@
+.profile-edit{
+    width: 100%;
+    margin-top: 3.285rem;
+    .window.profile-edit-container{
+        padding: 2rem 3rem;
+        & > a{
+            position: relative;
+            top: -4em;
+            left: -2.6em;
+            display: flex;
+            align-items: center;
+            gap:0.7rem;
+            color: #2D9CDB;
+            text-decoration: none;
+            font-size: 18px;
+            &:active{
+                color: initial
+            }
+            svg{
+                font-size: 22px;
+            }
+        }
+        > .profile-edit-header{
+            margin-bottom: 1.625rem;
+        }
+        > section:has(.widget-container){
+            margin-bottom: 2rem;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            > .full-input-box,
+            > .divided-input-box{
+                width: 55.6%;
+            }
+            button{
+                width: max-content;
+                padding: 0.5rem 2rem;
+            }
+        }
+    }
+}

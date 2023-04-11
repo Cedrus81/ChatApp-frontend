@@ -6,7 +6,6 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import Header from "./cmps/Header";
-import { User } from "./types";
 import ProfileEdit from "./views/ProfileEdit";
 
 function Layout(){

@@ -21,14 +21,13 @@ function InputBoxRHF({register, data, error, isDirty, currVal, resetField}: Inpu
       const commonProps = {
         id,
         title,
-        style,
         disabled,
         ...register,
         'data-theme': `background text ${shouldDisplayError() ? 'error border' : ''}`,
         className: isDirty || disabled ? 'floating' : '',
       }
       return(
-        <div className={`input-box ${style?.flex === 1 ? 'left' : style?.flex && style?.flex > 1 ? 'right' : ''}`}>
+        <div className={`input-box ${style?.flex === 1 ? 'left' : style?.flex && style?.flex > 1 ? 'right' : ''}`} style={style}>
           
           {id === 'bio' ? (
             <textarea  {...commonProps}></textarea>

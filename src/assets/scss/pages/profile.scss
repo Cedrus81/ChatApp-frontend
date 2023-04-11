@@ -1,4 +1,6 @@
 .profile-page{
+    width: 100%;
+    margin-top: 1.285rem;
     .profile-header{
         margin: 2rem;
         text-align: center;
@@ -6,7 +8,6 @@
     .profile.window{
         display: flex;
         flex-direction: column;
-        width: 52.875rem;
         border: 1px solid #E0E0E0;
         border-radius: 12px;
         section{
@@ -51,11 +52,9 @@
     flex: 3;
 }
 
-.user-photo,
-.placeholder-photo{
-    width: 72px;
-    height: 72px;
-    background-size: cover;
-    margin-block: 0.6rem;
-    border-radius: 0.5rem;
+
+@media screen and (min-width: 668px){
+    .profile-page{
+        padding-inline: 5em;
+    }
 }

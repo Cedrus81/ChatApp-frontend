@@ -30,11 +30,6 @@ export function useUser() {
         dispatch(clearUser())
         redirect('/')
         throw new Error('Your session has expired...')
-    } else {
-        return user;
     }
-}
-
-export function useSessionExpired(){
-    
+    return user;
 }

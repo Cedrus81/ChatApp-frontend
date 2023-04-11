@@ -27,6 +27,7 @@ body,button{
 
 button{
     cursor: pointer;
+    font-size: 14px;
 }
 
 h1{
@@ -42,9 +43,14 @@ h4{
     position: relative;
     align-self: center;
     height: max-content;
-    margin: 2em;
+    margin: 2em auto;
     border: 1px solid #BDBDBD;
     border-radius: 8px;
+    max-width: 60.428rem;
+
+    &:has(.login){
+        max-width: 29.625rem;
+    }
     .text{
         font-size: 14px;
         letter-spacing: -0.035em;
@@ -64,6 +70,14 @@ h4{
     }
 }
 
+
+.user-photo,
+.placeholder-photo{
+    width: 80px;
+    height: 80px;
+    margin-block: 0.6rem;
+    border-radius: 0.5rem;
+}
 
 .placeholder-photo{
 
