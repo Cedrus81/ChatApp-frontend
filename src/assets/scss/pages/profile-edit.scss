@@ -33,7 +33,9 @@
             width: max(55.6%, 20rem);
             button{
                 width: max-content;
-                padding: 0.5rem 2rem;
+                &.call-to-action{
+                    padding: 0.5rem 2rem;
+                }
             }
         }
     }

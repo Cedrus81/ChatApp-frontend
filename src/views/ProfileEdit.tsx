@@ -83,7 +83,7 @@ function ProfileEdit() {
           <p data-theme="text">Changes will be reflected to every services</p>
         </section>
         <section>
-            <UploadWidget setValue={(value: string)=> setUserPhoto(value)} user={user} />
+            <UploadWidget setValue={(value: string)=> setUserPhoto(value)} user={user!} />
         </section>
         <form onSubmit={(e)=>handleSubmit(onSubmit)(e).catch((e)=>{
             // todo: add error handling logic

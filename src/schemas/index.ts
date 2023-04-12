@@ -21,7 +21,7 @@ yup.addMethod(yup.string, 'fromCountryList', function(message){
 
 export const editSchema = yup.object().shape({
     email: yup.string().email('Must be a valid email'),
-    password: yup.string().optional().matches(EditPasswordRules, '8-20 chars, from which: 1 uppercase, 1 lowercase, 1 digit'),
+    password: yup.string().matches(EditPasswordRules, '8-20 chars, from which: 1 uppercase, 1 lowercase, 1 digit'),
     bio: yup.string().matches(/^.{25,}$|^$/, 'Must be at least 25 character long'),
     name: yup.string().matches(/^(?:[A-Za-z]+(?:\s+[A-Za-z]+)*)?$/, 'Must be a valid name'),
     phone: yup.string().matches(/^$/ || /^\d{10}/, '10 digits, only numbers'),
@@ -33,7 +33,7 @@ export const signupSchema = yup.object().shape({
     password: yup.string().matches(passwordRules, '8-20 chars, from which: 1 uppercase, 1 lowercase, 1 digit').required('Required'),
     bio: yup.string().matches(/^.{25,}$|^$/, 'Must be at least 25 character long'),
     name: yup.string().matches(/^(?:[A-Za-z]+(?:\s+[A-Za-z]+)*)?$/, 'Must be a valid name'),
-    phone: yup.string().matches(/^$/ || /^\d{10}/, '10 digits, only numbers'),
+    phone: yup.string().optional().matches(/^\d{10}/, '10 digits, only numbers'),
     dial: yup.string().fromCountryList('Unknown code'),
 })
 

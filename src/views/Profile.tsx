@@ -1,16 +1,23 @@
 import { FaUserAlt } from "react-icons/fa"
 import { useUser } from "../hooks"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { utilService } from "../services/utils.service"
+import { useEffect } from "react"
 
 function Profile() {
+    const navigate = useNavigate()
     const user = useUser()
+    useEffect(() => {
+      if(!useUser()) navigate('/')
+    }, [user])
+    
     const fieldOrder: string[] = [
         'name',
         'bio',
         'phone',
         'email',
     ]
+    if(!user) return (<></>)
     return (
         <main className="profile-page">
             <header className="profile-header">
@@ -30,10 +37,10 @@ function Profile() {
                 <section>
                     <span>PHOTO</span>
                     <div className="profile-photo-container">
-                    {user.photo ?
+                    {user!.photo ?
                       (<div 
                         className="user-photo" 
-                        style={{backgroundImage: user.photo ? `url(${utilService.cloudinaryThumbnail(user.photo, 80)})` : ``}}></div>
+                        style={{backgroundImage: user!.photo ? `url(${utilService.cloudinaryThumbnail(user!.photo, 80)})` : ``}}></div>
                         ) 
                      : 
                      (<div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div>)}
@@ -43,7 +50,7 @@ function Profile() {
                     return (
                         <section key={field}>
                             <span>{field.toUpperCase()}</span>
-                            <h3 data-theme="headline">{user[field as keyof typeof user]}</h3>
+                            <h3 data-theme="headline">{user![field as keyof typeof user]}</h3>
                         </section>
                     )
                 })}

@@ -42,7 +42,7 @@ function Header({user}: HeaderProps) {
         navigate('/my-profile')
       }
     // todo get current user's name and image
-    // if(!user) return (<></>)
+    if(!user) return (<></>)
   return (
     <header className="app-header">
         <ThemeToggle dispatch={dispatch} />
