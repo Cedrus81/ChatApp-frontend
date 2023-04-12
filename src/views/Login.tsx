@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IoMdMail, IoMdLock } from "react-icons/io";
 import {  faGithub, faGoogle, faTwitter, faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { signin } from "../store/slices/userSlice";
 import { yupResolver } from "@hookform/resolvers/yup";

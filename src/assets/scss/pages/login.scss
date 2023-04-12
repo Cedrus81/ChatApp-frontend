@@ -1,16 +1,15 @@
 .login{
     display: flex;
     flex-direction: column;
-    // width: 29.625rem;
+    padding: 1em;
     gap: 1.75rem;
-    padding-block: 3rem;
-    padding-inline: 3.5rem;
-    margin-block: 5rem;
+
     p, pre{
         margin: 0;
     }
     a{
         text-decoration: none;
+        color: #2D9CDB;
     }
     form{
         display: flex;
@@ -32,6 +31,7 @@
             transition: 0.3s;
             transform: scale(1.1);
             svg{
+                font-size: 20px;
                 width: 1.125rem;
                 height: 1.125rem;
             }
@@ -41,5 +41,14 @@
                 color: #2F80ED;
             }
         }
+    }
+}
+
+
+@media screen and (min-width: 668px){
+    .login{
+        margin-block: 5rem;
+        padding-block: 3rem;
+        padding-inline: 3.5rem;
     }
 }

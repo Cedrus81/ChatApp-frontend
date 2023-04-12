@@ -46,7 +46,7 @@ function Header({user}: HeaderProps) {
   return (
     <header className="app-header">
         <ThemeToggle dispatch={dispatch} />
-        <button ref={dropBtnDownRef}>
+        <button className="dropdown-button" ref={dropBtnDownRef}>
           {user!.photo ?
             (<div 
             className="user-photo" 

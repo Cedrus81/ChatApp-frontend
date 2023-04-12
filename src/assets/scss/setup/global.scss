@@ -44,7 +44,6 @@ h4{
     align-self: center;
     height: max-content;
     margin: 2em auto;
-    border: 1px solid #BDBDBD;
     border-radius: 8px;
     max-width: 60.428rem;
 
@@ -61,10 +60,10 @@ h4{
             position: absolute;
             bottom: -2.5rem;
             &.credit{
-                right:0
+                right: 1em;
             }
             &.creator{
-                left: 0;
+                left: 1em;
             }
         }
     }
@@ -77,16 +76,14 @@ h4{
     height: 80px;
     margin-block: 0.6rem;
     border-radius: 0.5rem;
-}
-
-.placeholder-photo{
-
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     svg{
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 }
 
@@ -99,4 +96,21 @@ button.call-to-action{
     border: 0;
     padding: 0.6rem;
     line-height: 1.25rem;
+}
+
+
+@media screen and (min-width: 668px){
+    .window{
+        border: 1px solid #BDBDBD;
+        .footnote{
+            position: absolute;
+            bottom: -2.5rem;
+            &.credit{
+                right:0
+            }
+            &.creator{
+                left: 0;
+            }
+        }
+    }
 }

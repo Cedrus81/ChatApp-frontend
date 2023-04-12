@@ -32,7 +32,7 @@ function UploadWidget({ setValue, user }: UploadWidgetProps) {
       (<div 
       className="user-photo" 
       onClick={() => widgetRef.current.open()} 
-      style={{backgroundImage: user.photo ? `url(${utilService.cloudinaryThumbnail(user.photo, 80)})` : ``}}></div>
+      style={{backgroundImage: user.photo ? `linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${utilService.cloudinaryThumbnail(user.photo, 80)})` : ``}}><BsFillCameraFill /></div>
       ) 
       : 
       (<div 

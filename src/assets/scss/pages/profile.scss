@@ -8,7 +8,6 @@
     .profile.window{
         display: flex;
         flex-direction: column;
-        border: 1px solid #E0E0E0;
         border-radius: 12px;
         section{
             display: flex;
@@ -22,14 +21,12 @@
                     border: 1px solid #828282;
                     border-radius: 12px;
                     padding: 0.5rem 2rem;
+                    margin-inline-start: 1em;
                     transition: 0.2s;
                     &:hover{
                         box-shadow: 0 0 6px 4px rgba(#BDBDBD, 0.2), inset 0 0 6px 4px rgba(#BDBDBD, 0.8);
                     }
                 }
-            }
-            &:last-of-type{
-                border-bottom: none;
             }
             span{
                 flex: 1;
@@ -38,6 +35,7 @@
             }
             h3{
                 flex: 3;
+                text-align: end;
                 letter-spacing: -0.035em;
                 font-weight: 500;
                 font-size: 18px;
@@ -50,11 +48,28 @@
 
 .profile-photo-container{
     flex: 3;
+    .user-photo{
+        margin-inline-start: auto;
+    }
 }
 
 
 @media screen and (min-width: 668px){
     .profile-page{
         padding-inline: 5em;
+        .profile.window{
+            border: 1px solid #E0E0E0;
+            section{
+                &:last-of-type{
+                    border-bottom: none;
+                }
+                h3{
+                    text-align: start;
+                }
+        }
+            .profile-photo-container .user-photo{
+                margin-inline-start: none;
+            }
+        }
     }
 }

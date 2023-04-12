@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 import type { RootState, AppDispatch } from './store'
-import { redirect, useOutletContext } from 'react-router-dom'
+import { redirect, useNavigate, useOutletContext } from 'react-router-dom'
 import { User } from './types'
 import { clearUser } from './store/slices/userSlice'
 
@@ -22,14 +22,15 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 // my addition: now also checks if the session is over, and does not return null anymore
 type ContextType = { user: User | null };
 export function useUser() {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const hasSessionExpired = !document.cookie.includes('jwt=')
     const user = useOutletContext<ContextType>().user
     
     if(hasSessionExpired || !user){
         dispatch(clearUser())
-        redirect('/')
-        throw new Error('Your session has expired...')
+        navigate('/')
+        // throw new Error('Your session has expired...')
     }
     return user;
 }

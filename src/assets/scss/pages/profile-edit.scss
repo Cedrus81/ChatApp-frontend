@@ -30,10 +30,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            > .full-input-box,
-            > .divided-input-box{
-                width: 55.6%;
-            }
+            width: max(55.6%, 20rem);
             button{
                 width: max-content;
                 padding: 0.5rem 2rem;
