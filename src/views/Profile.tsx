@@ -1,16 +1,15 @@
 import { FaUserAlt } from "react-icons/fa"
-import { useUser } from "../hooks"
-import { Link, useNavigate } from "react-router-dom"
+import { useAppSelector, useUserSession } from "../hooks"
+import { Link, useNavigate, useOutletContext } from "react-router-dom"
 import { utilService } from "../services/utils.service"
 import { useEffect } from "react"
+import { ContextType } from "../types"
 
 function Profile() {
-    const navigate = useNavigate()
-    const user = useUser()
-    useEffect(() => {
-      if(!useUser()) navigate('/')
-    }, [user])
     
+    // const navigate = useNavigate()
+    // const user = useOutletContext<ContextType>().user
+    const user = useUserSession()
     const fieldOrder: string[] = [
         'name',
         'bio',
@@ -37,10 +36,10 @@ function Profile() {
                 <section>
                     <span>PHOTO</span>
                     <div className="profile-photo-container">
-                    {user!.photo ?
+                    {user && user.photo ?
                       (<div 
                         className="user-photo" 
-                        style={{backgroundImage: user!.photo ? `url(${utilService.cloudinaryThumbnail(user!.photo, 80)})` : ``}}></div>
+                        style={{backgroundImage: user.photo ? `url(${utilService.cloudinaryThumbnail(user.photo, 80)})` : ``}}></div>
                         ) 
                      : 
                      (<div className="placeholder-photo" data-theme="call-to-action"><FaUserAlt /></div>)}

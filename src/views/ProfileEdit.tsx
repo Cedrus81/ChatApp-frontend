@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useAppDispatch, useUser } from "../hooks"
+import { useAppDispatch, useAppSelector } from "../hooks"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { editSchema } from "../schemas"
 import { useForm } from "react-hook-form"
@@ -17,7 +17,7 @@ import { useMemo } from "react"
 function ProfileEdit() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const user = useUser()
+  const user = useAppSelector(state => state.user.loggedInUser)
 
   const {register, handleSubmit, formState: {errors, dirtyFields, isSubmitting}, trigger, resetField, getValues} = useForm<SignupFormValues>({
     resolver: yupResolver(editSchema),

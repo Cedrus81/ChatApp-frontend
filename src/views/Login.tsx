@@ -62,10 +62,14 @@ const fields: FieldData[] = [
       icon: <FontAwesomeIcon icon={faGithub} />
     },
   }
+  console.log('login')
   async function onSubmit(data: LoginFormValues){
-    console.log('isSubmitting', isSubmitting)
-    await dispatch(signin(data))
-    navigate('/my-profile')
+    try{
+      await dispatch(signin(data))
+      if(user) navigate('/my-profile')
+    } catch (err){
+      console.log(err)
+    }
   }
   if (isSubmitting){
     return (

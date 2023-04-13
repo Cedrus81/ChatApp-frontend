@@ -6,3 +6,5 @@ export type User = {
     phone?: string;
     bio?: string;
 }
+
+export type ContextType = { user: User | null };

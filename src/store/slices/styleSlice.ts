@@ -22,6 +22,7 @@ export const styleSlice = createSlice({
             document.querySelector('body')?.classList.toggle(state.theme)
         },
         initialTheme: (state =>{
+            //todo don't toggle, it can cause either both themes or none in some edge cases
             state.theme = storageService.getItem(THEME_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
             if (!storageService.getItem(THEME_KEY)) storageService.setItem(THEME_KEY, state.theme)
             document.querySelector('body')?.classList.toggle(state.theme)

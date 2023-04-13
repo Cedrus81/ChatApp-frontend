@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     dispatch(initialTheme())
   }, [])
-  
+  console.log('app.tsx re-rendered')
   return (
     <RouterProvider router={router}/>
   )
